@@ -12,6 +12,8 @@ public class main {
         
         JOptionPane.showMessageDialog(null,"Hola esto es una prueba");
         
+        //cómo estás??
+        
     }
     
 }
