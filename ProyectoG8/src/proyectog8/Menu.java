@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectog8;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author NIKY
- */
 public class Menu {
     private int opc;
     private Lista c=new Lista();
@@ -35,7 +27,7 @@ public class Menu {
                 break;
             }
             case 3: {
-                c.inactivarusuario();
+                c.desactivarusuario();
                 mostrarMenu();
                 break;
             }
@@ -45,7 +37,7 @@ public class Menu {
             }
             default: {
                 JOptionPane.showMessageDialog(null,
-                        "Opción incorrecta, revise!");
+                        "Opción inválida, revise!");
             }
         }
     }

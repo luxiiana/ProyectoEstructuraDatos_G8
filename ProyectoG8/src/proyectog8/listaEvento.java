@@ -1,5 +1,7 @@
 package proyectog8;
 
+import javax.swing.JOptionPane;
+
 public class listaEvento {
     
     private nodoEvento inicio;
@@ -10,7 +12,7 @@ public class listaEvento {
         this.fin=null;
     }
     
-    public boolean esVacia(){
+    public boolean esVacio(){
         if(inicio==null){
             return true;
         }else{
@@ -18,6 +20,24 @@ public class listaEvento {
         }
     }
     
-    //ACÁ QUEDÉ!!!
+    public void agregarEvento(String nombreEvento, int fecha, String lugar){
+        //se crea objeto para nuestros datos
+        Evento e = new Evento();
+        
+        //llenamos con los datos al objeto
+        e.setNombreEvento(JOptionPane.showInputDialog("Ingrese el nombre del evento: "));
+        e.setFecha(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la fecha del evento: ")));
+        e.setLugar(JOptionPane.showInputDialog("Ingrese la fecha del evento: "));
+        
+        //se crea el objeto del nodo 
+        nodoEvento ne = new nodoEvento();
+        //se establece que nuestro nodo contiene los datos del primer objeto que creamos
+        ne.setDato(e);
+        
+        if(esVacio()){ //agregar al inicio
+            
+        }
+        //VOY ACÁ
+    }
     
 }

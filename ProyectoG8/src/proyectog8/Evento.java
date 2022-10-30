@@ -6,12 +6,12 @@ public class Evento {
     
     private int fecha=0;
     
-    private char lugar=' ';
+    private String lugar="";
     
     public Evento(){
         this.nombreEvento=null;
         this.fecha=0;
-        this.lugar=' ';
+        this.lugar="";
     }
 
     public String getNombreEvento() {
@@ -30,14 +30,12 @@ public class Evento {
         this.fecha = fecha;
     }
 
-    public char getLugar() {
+    public String getLugar() {
         return lugar;
     }
 
-    public void setLugar(char lugar) {
+    public void setLugar(String lugar) {
         this.lugar = lugar;
     }
-    
-    
-    
+
 }

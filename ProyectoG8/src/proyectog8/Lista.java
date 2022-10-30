@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectog8;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author NIKY
- */
 public class Lista {
     private NodoC inicio;
 
@@ -50,7 +42,7 @@ public class Lista {
       }
    } 
    
-   public void inactivarusuario(){
+   public void desactivarusuario(){
        if(!esVaciaC()){
          String nomb=JOptionPane.showInputDialog(null,"Digite el nombre del usuario a eliminar:");
          if(inicio.getElemento().getNombre().equals(nomb)){
