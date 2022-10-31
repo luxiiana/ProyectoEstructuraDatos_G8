@@ -4,7 +4,7 @@ public class Evento {
     
     private String nombreEvento="";
     
-    private int fecha=0;
+    private int fecha = 0;
     
     private String lugar="";
     
@@ -29,7 +29,7 @@ public class Evento {
     public void setFecha(int fecha) {
         this.fecha = fecha;
     }
-
+    
     public String getLugar() {
         return lugar;
     }

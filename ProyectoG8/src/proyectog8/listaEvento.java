@@ -26,8 +26,8 @@ public class listaEvento {
         
         //llenamos con los datos al objeto
         e.setNombreEvento(JOptionPane.showInputDialog("Ingrese el nombre del evento: "));
-        e.setFecha(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la fecha del evento: ")));
-        e.setLugar(JOptionPane.showInputDialog("Ingrese la fecha del evento: "));
+        e.setFecha(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la fecha del evento de la siguiente forma: \nEjemplo: 1 de enero, 2010\nDebe escribirlo así: 20100101")));
+        e.setLugar(JOptionPane.showInputDialog("Ingrese el lugar del evento: "));
         
         //se crea el objeto del nodo 
         nodoEvento ne = new nodoEvento();
@@ -36,8 +36,15 @@ public class listaEvento {
         
         if(esVacio()){ //agregar al inicio
             
+            //establecer el primer nodo
+            inicio=ne;
+            fin=ne;
+            
+            //referencia circular 
+            fin.setSiguiente(inicio);
+            
         }
-        //VOY ACÁ
+        
     }
     
 }
