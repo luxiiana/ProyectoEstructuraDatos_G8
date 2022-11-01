@@ -4,13 +4,13 @@ public class Evento {
     
     private String nombreEvento="";
     
-    private int fecha = 0;
+    private String fecha = "";
     
     private String lugar="";
     
     public Evento(){
         this.nombreEvento=null;
-        this.fecha=0;
+        this.fecha=null;
         this.lugar="";
     }
 
@@ -22,11 +22,11 @@ public class Evento {
         this.nombreEvento = nombreEvento;
     }
 
-    public int getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(int fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
     

@@ -26,7 +26,7 @@ public class listaEvento {
         
         //llenamos con los datos al objeto
         e.setNombreEvento(JOptionPane.showInputDialog("Ingrese el nombre del evento: "));
-        e.setFecha(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la fecha del evento de la siguiente forma: \nEjemplo: 1 de enero, 2010\nDebe escribirlo así: 20100101")));
+        e.setFecha(JOptionPane.showInputDialog("Ingrese la fecha del evento de la siguiente forma: \nEjemplo: 1 de enero, 2000\n"));
         e.setLugar(JOptionPane.showInputDialog("Ingrese el lugar del evento: "));
         
         //se crea el objeto del nodo 
@@ -34,14 +34,20 @@ public class listaEvento {
         //se establece que nuestro nodo contiene los datos del primer objeto que creamos
         ne.setDato(e);
         
-        if(esVacio()){ //agregar al inicio
+        if(inicio.getDato().getLugar().equals("") && inicio.getDato().getFecha().equals("") && esVacio()){
             
-            //establecer el primer nodo
+            //si el nodo de inicio es vacio (no tiene lugar ni fecha) entonces podemos agregar el evento
+            
+            //agregar al inicio
             inicio=ne;
             fin=ne;
             
             //referencia circular 
             fin.setSiguiente(inicio);
+            
+        }else if(!inicio.getDato().getLugar().equals("") && !inicio.getDato().getFecha().equals("")){
+            
+            
             
         }
         
