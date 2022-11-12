@@ -39,6 +39,25 @@ public class ListaAsientos {
          fin=nuevo; 
          fin.setSiguiente(inicio);
          inicio.setAnterior(fin);
+       }else if(a.getNumAsiento()<inicio.getDato().getNumAsiento()){
+           nuevo.setSiguiente(inicio);
+         inicio=nuevo;
+         fin.setSiguiente(inicio);
+         inicio.setAnterior(fin);
+       }else if(a.getNumAsiento()>=fin.getDato().getNumAsiento()){
+           fin.setSiguiente(nuevo);
+         fin=nuevo;   
+         fin.setSiguiente(inicio);  
+         inicio.setAnterior(fin);
+       }else{
+           nodoAsiento aux=inicio;
+           while(aux.getSiguiente().getDato().getNumAsiento()<a.getNumAsiento()){
+               aux=aux.getSiguiente();
+           }
+           nuevo.setSiguiente(aux.getSiguiente());
+         nuevo.setAnterior(aux);
+         aux.setSiguiente(nuevo);
+         nuevo.getSiguiente().setAnterior(nuevo);
        }
        
    }
