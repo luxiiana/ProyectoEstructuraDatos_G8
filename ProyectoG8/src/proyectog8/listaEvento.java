@@ -20,9 +20,31 @@ public class listaEvento {
         }
     }
     
-    public int agregarEvento(int numEventos){
+    public boolean Existe(){
         
-        numEventos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de eventos que agregará: "));
+        nodoEvento aux = inicio;
+        
+        if(aux.getDato()!=aux.getSiguiente().getDato()){
+            aux=aux.getSiguiente();
+            return false;
+        }else{
+            JOptionPane.showMessageDialog(null, "El evento ya existe, intente con uno diferente...");
+            return true;
+        }
+    }
+    
+    public boolean fechaOcupada(){
+        nodoEvento aux = inicio;
+        if(aux.getDato().getFecha() == inicio.getDato().getFecha()){
+            JOptionPane.showMessageDialog(null, "Fecha ocupada");
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Fecha libre");
+            return false;
+        }
+    }
+    
+    public int agregarEvento(int numEventos){
         
         if(numEventos==0){
             return 0;
@@ -30,10 +52,13 @@ public class listaEvento {
             //se crea objeto para nuestros datos
             Evento e = new Evento();
 
-            //llenamos con los datos al objeto
-            e.setNombreEvento(JOptionPane.showInputDialog("Ingrese el nombre del evento: "));
-            e.setFecha(JOptionPane.showInputDialog("Ingrese la fecha del evento de la siguiente forma: \nEjemplo: 1 de enero, 2000\n"));
-            e.setLugar(JOptionPane.showInputDialog("Ingrese el lugar del evento: "));
+            //validación, se repetirá si ya el evento existe (con fecha, lugar y nombre) o si la fecha o el lugar están ocupados
+            while(Existe() || fechaOcupada()){
+                //llenamos con los datos al objeto
+                e.setNombreEvento(JOptionPane.showInputDialog("Ingrese el nombre del evento: "));
+                e.setFecha(JOptionPane.showInputDialog("Ingrese la fecha del evento de la siguiente forma: \nEjemplo: 1 de enero, 2000\n"));
+                e.setLugar(JOptionPane.showInputDialog("Ingrese el lugar del evento: "));
+            }
 
             //se crea el objeto del nodo 
             nodoEvento ne = new nodoEvento();
@@ -79,6 +104,20 @@ public class listaEvento {
         
         
         
+    }
+    
+    public void mostrarEventos(){
+        if(!esVacio()){
+            String s = "";
+            nodoEvento aux = inicio;
+            while(aux!=null){
+                s=s+aux.getDato().getNombreEvento()+"---"+aux.getDato().getFecha()+"---"+aux.getDato().getLugar()+"--->";
+                aux=aux.getSiguiente();
+            }
+            JOptionPane.showMessageDialog(null, "---Lista de eventos---\n"+s);
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay datos...intente después de agregar al menos 1 evento!");
+        }
     }
     
 }

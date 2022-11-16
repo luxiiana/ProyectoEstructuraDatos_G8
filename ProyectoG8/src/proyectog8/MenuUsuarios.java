@@ -2,43 +2,46 @@ package proyectog8;
 
 import javax.swing.JOptionPane;
 
-public class Menu {
+public class MenuUsuarios {
     private int opc;
     private Lista c=new Lista();
     Dato d = new Dato();
 
     public void mostrarMenu() {
+        
         opc = Integer.parseInt(JOptionPane.showInputDialog(null,
-                "***MENÚ PRINCIPAL***\n\n"
+                "***USUARIOS***\n\n"
                 + "1. Registrar usuario\n"
                 + "2. Iniciar Sesion\n"
                 + "3. Inactivar usuario\n"
-                + "4. Salir del sistema\n\n"
+                + "4. Volver al menú principal\n\n"
                 + "Digite su opción:"));
+        
         switch (opc) {
-            case 1: {
+            case 1:
                 c.agregar();
                 mostrarMenu();
                 break;
-            }
-            case 2: {
+
+            case 2:
                 c.mostrarLista();
                 mostrarMenu();
                 break;
-            }
-            case 3: {
+
+            case 3:
                 c.desactivarusuario();
                 mostrarMenu();
                 break;
-            }
-            case 4: {
-                System.exit(0);
+
+            case 4:
+                JOptionPane.showMessageDialog(null, "Volviendo al menú principal...");
                 break;
-            }
-            default: {
-                JOptionPane.showMessageDialog(null,
-                        "Opción inválida, revise!");
-            }
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opción inválida, revise!");
+                mostrarMenu();
+                break;
+
         }
     }
     
