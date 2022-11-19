@@ -62,6 +62,32 @@ public class ListaAsientos {
        
    }
    
+   public void editarAsiento(){
+       nodoAsiento aux=inicio;
+       if(aux!=null){
+           while(aux.getSiguiente()!=inicio){
+               if(aux.getDato().equals(aux.getDato().getNumAsiento())){
+                   // aqui verifica el asiento y pueden todo lo que se va a editar como la disponibilidad y eso
+               }
+           }
+           
+       }
+   }
+   
+   
+   public void eliminarAsiento(){
+       if(!esVacia()){
+            inicio=inicio.getSiguiente();
+            fin.setSiguiente(inicio);
+            inicio.setAnterior(fin);
+             JOptionPane.showMessageDialog(null,"El elemento fue extraído!");
+         }else{
+            //a partir de aqui se pone que el asiento no pudo ser eliminado porque estaba ocupado o algo asi
+         }
+   }
+   
    
 
 }
+
+
