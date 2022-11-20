@@ -2,20 +2,21 @@ package proyectog8;
 
 public class nodoEvento {
     
-    private Evento dato;
+    private Evento elemento;
+    
     private nodoEvento siguiente;
     
     public nodoEvento(){
-        this.dato=null;
+        this.elemento=null;
         this.siguiente=null;
     }
 
-    public Evento getDato() {
-        return dato;
+    public Evento getElemento() {
+        return elemento;
     }
 
-    public void setDato(Evento dato) {
-        this.dato = dato;
+    public void setElemento(Evento elemento) {
+        this.elemento = elemento;
     }
 
     public nodoEvento getSiguiente() {

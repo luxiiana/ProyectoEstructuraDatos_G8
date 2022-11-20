@@ -3,121 +3,114 @@ package proyectog8;
 import javax.swing.JOptionPane;
 
 public class listaEvento {
-    
+
     private nodoEvento inicio;
-    private nodoEvento fin;
-    
-    public listaEvento(){
-        this.inicio=null;
-        this.fin=null;
+
+    public listaEvento() {
+        this.inicio = null;
     }
-    
-    public boolean esVacio(){
-        if(inicio==null){
+
+    public boolean esVacio() {
+        if (inicio == null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-    public boolean Existe(){
-        
-        nodoEvento aux = inicio;
-        
-        if(aux.getDato()!=aux.getSiguiente().getDato()){
-            aux=aux.getSiguiente();
-            return false;
-        }else{
-            JOptionPane.showMessageDialog(null, "El evento ya existe, intente con uno diferente...");
-            return true;
-        }
-    }
-    
-    public boolean fechaOcupada(){
-        nodoEvento aux = inicio;
-        if(aux.getDato().getFecha() == inicio.getDato().getFecha()){
-            JOptionPane.showMessageDialog(null, "Fecha ocupada");
-            return true;
-        }else{
-            JOptionPane.showMessageDialog(null, "Fecha libre");
-            return false;
-        }
-    }
-    
-    public int agregarEvento(int numEventos){
-        
-        if(numEventos==0){
+
+    public int crearEvento(int numEventos) {
+
+        Evento e = new Evento();
+
+        if (numEventos == 0) {
             return 0;
-        }else{
-            //se crea objeto para nuestros datos
-            Evento e = new Evento();
+        } else {
+            e.setNomEvento(JOptionPane.showInputDialog("Ingrese el nombre del nuevo evento: "));
 
-            //validación, se repetirá si ya el evento existe (con fecha, lugar y nombre) o si la fecha o el lugar están ocupados
-            while(Existe() || fechaOcupada()){
-                //llenamos con los datos al objeto
-                e.setNombreEvento(JOptionPane.showInputDialog("Ingrese el nombre del evento: "));
-                e.setFecha(JOptionPane.showInputDialog("Ingrese la fecha del evento de la siguiente forma: \nEjemplo: 1 de enero, 2000\n"));
-                e.setLugar(JOptionPane.showInputDialog("Ingrese el lugar del evento: "));
+            /*JOptionPane.showMessageDialog(null, "---FECHA---\nAcontinuación complete: "
+                    + "\n-Día (como 1, 2 , 3...etc)\n-Mes (mayo, agosto, octubre...etc)\n-Año (2022, 2023, 2024,...etc)");
+            e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día del evento: ")));
+            e.setMes(JOptionPane.showInputDialog("Ingrese el mes del evento: "));
+            e.setAno(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el año del evento:")));*/
+            JOptionPane.showMessageDialog(null, "A continuación ingresará la fecha:");
+
+            //--------------MES-------------
+            e.setMes(JOptionPane.showInputDialog("Elija el mes del evento: "
+                    + "\na. Enero\nb. Febrero\nc. Marzo\nd. Abril\ne. Mayo\nf. Junio\ng. Julio"
+                    + "\nh. Agosto\ni. Setiembre\nj. Octubre\nk. Noviembre\nl. Diciembre").toLowerCase().charAt(0));
+
+            //-------------DIA---------------
+            if (e.getMes() == 'b') {
+                do {
+                    e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día del evento: ")));
+                } while (e.getDia() < 29);
+            } else if (e.getMes() == 'd' || e.getMes() == 'f' || e.getMes() == 'i' || e.getMes() == 'k') {
+                do {
+                    e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día del evento: ")));
+                } while (e.getDia() < 31);
+            } else {
+                do {
+                    e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día del evento: ")));
+                } while (e.getDia() < 32);
             }
 
-            //se crea el objeto del nodo 
-            nodoEvento ne = new nodoEvento();
-            //se establece que nuestro nodo contiene los datos del primer objeto que creamos
-            ne.setDato(e);
-            
-            if(esVacio()){ //agregar si está vacío
+            //-------------AÑO---------------
+            e.setAno(JOptionPane.showInputDialog("Escoja el año del evento: \na. 2022 \nb.2023\nc.2024").toLowerCase().charAt(0));
 
-                //si el nodo de inicio es vacio (no tiene lugar ni fecha) entonces podemos agregar el evento
-
-                //agregar al inicio
-                inicio=ne;
-                fin=ne;
-
-                //referencia circular 
-                fin.setSiguiente(inicio);
-
-            }else if(e.getFecha().compareTo(inicio.getDato().getFecha()) <0){ //agregar a la izquierda
-
-                //si el dato de fecha es mayor a la fecha del inicio, el inicio pasa a siguiente y el inicio será el nuevo nodo
-                inicio.setSiguiente(inicio);
-                inicio=ne;
-
-                //referenica circular
-                fin.setSiguiente(inicio);
-
-            }else if(inicio.getDato().getFecha().compareTo(e.getFecha()) <0){ //agregar a la derecha
-                
-                //el dato que le sigue a inicio será el nodo nuevo
-                inicio.setSiguiente(ne);
-                
-                //referencia circular
-                fin.setSiguiente(inicio);
-                
-            }else{ //agrega en medio
-                
-            }
-            
-            //recursividad, la cantidad de eventos que dijimos al inicio va a disminuir hasta llegar al caso base
-            numEventos--;
-            return (agregarEvento(numEventos));
+            return crearEvento(numEventos - 1);
         }
-        
-        
-        
+    }
+
+    public char editarEvento(char editar) {
+        Evento e = new Evento();
+        if (editar == 'n') {
+            JOptionPane.showMessageDialog(null, "¡Evento editado!");
+            return editar = 'n';
+        } else {
+            if (!esVacio()) {
+                nodoEvento aux = inicio;
+                while (aux != null) {
+                    char opc = ' ';
+                    opc = JOptionPane.showInputDialog("¿Qué desea editar?\na. Nombre del evento \nb.Día\nc. Mes\nd. Año\ne. Salir al menú principal").toLowerCase().charAt(0);
+                    switch (opc) {
+                        case 'a':
+                            e.setNomEvento(JOptionPane.showInputDialog("Nombre actual:\n"+e.getNomEvento()+"\nIngrese el nuevo nombre del nuevo evento: "));
+                            break;
+                        case 'b':
+                            if (e.getMes() == 'b') {
+                                do {
+                                    e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Día actual:\n"+e.getDia()+"\nIngrese el día del evento: ")));
+                                } while (e.getDia() < 29);
+                            } else if (e.getMes() == 'd' || e.getMes() == 'f' || e.getMes() == 'i' || e.getMes() == 'k') {
+                                do {
+                                  e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Día actual:\n"+e.getDia()+"\nIngrese el día del evento: ")));  
+                                } while (e.getDia() < 31);
+                            } else {
+                                do {
+                                    e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Día actual:\n"+e.getDia()+"\nIngrese el día del evento: ")));
+                                } while (e.getDia() < 32);
+                            }
+                            break;
+                        case 'c':
+                            e.setMes(JOptionPane.showInputDialog("Mes actual:\n"+e.getMes()+"\nElija el mes del evento: "
+                                    + "\na. Enero\nb. Febrero\nc. Marzo\nd. Abril\ne. Mayo\nf. Junio\ng. Julio"
+                                    + "\nh. Agosto\ni. Setiembre\nj. Octubre\nk. Noviembre\nl. Diciembre").toLowerCase().charAt(0));
+                            break;
+                        case 'd':
+                            e.setAno(JOptionPane.showInputDialog("Escoja el año del evento: \na. 2022 \nb.2023\nc.2024").toLowerCase().charAt(0));
+                            break;
+                        case 'e':
+                            break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Evento no existe...");
+            }
+            return editarEvento(editar = JOptionPane.showInputDialog("¿Desea editar algo más? "
+                    + "\n-Si\n-No").toLowerCase().charAt(0));
+        }
+
     }
     
-    public void mostrarEventos(){
-        if(!esVacio()){
-            String s = "";
-            nodoEvento aux = inicio;
-            while(aux!=null){
-                s=s+aux.getDato().getNombreEvento()+"---"+aux.getDato().getFecha()+"---"+aux.getDato().getLugar()+"--->";
-                aux=aux.getSiguiente();
-            }
-            JOptionPane.showMessageDialog(null, "---Lista de eventos---\n"+s);
-        }else{
-            JOptionPane.showMessageDialog(null, "No hay datos...intente después de agregar al menos 1 evento!");
-        }
-    }
     
 }

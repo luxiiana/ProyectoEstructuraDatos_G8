@@ -2,40 +2,62 @@ package proyectog8;
 
 public class Evento {
     
-    private String nombreEvento="";
+    private String nomEvento="";
     
-    private String fecha = "";
+    private int dia = 0;
     
-    private String lugar="";
+    private char mes = ' ';
+    
+    private char ano = ' ';
+    
+    private char lugar = 0;
     
     public Evento(){
-        this.nombreEvento=null;
-        this.fecha=null;
-        this.lugar="";
+        this.nomEvento=null;
+        this.dia=0;
+        this.mes=' ';
+        this.ano=' ';
+        this.lugar=' ';
     }
 
-    public String getNombreEvento() {
-        return nombreEvento;
+    public String getNomEvento() {
+        return nomEvento;
     }
 
-    public void setNombreEvento(String nombreEvento) {
-        this.nombreEvento = nombreEvento;
+    public void setNomEvento(String nomEvento) {
+        this.nomEvento = nomEvento;
     }
 
-    public String getFecha() {
-        return fecha;
+    public int getDia() {
+        return dia;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public char getMes() {
+        return mes;
+    }
+
+    public void setMes(char mes) {
+        this.mes = mes;
+    }
+
+    public char getAno() {
+        return ano;
+    }
+
+    public void setAno(char ano) {
+        this.ano = ano;
     }
     
-    public String getLugar() {
+    public char getLugar() {
         return lugar;
     }
 
-    public void setLugar(String lugar) {
+    public void setLugar(char lugar) {
         this.lugar = lugar;
     }
-
+    
 }
