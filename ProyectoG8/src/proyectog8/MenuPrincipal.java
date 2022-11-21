@@ -10,6 +10,7 @@ public class MenuPrincipal {
     MenuEventos me = new MenuEventos();
     
     //Menú de los asientos
+    MenuAsientos ma = new MenuAsientos();
     
     
     char opc = ' ';
@@ -25,11 +26,11 @@ public class MenuPrincipal {
                 MenuP();
                 break;
             case 'b':
-                me.mostrarMenu(); //muestra el menu de los eventos
+                //me.mostrarMenu(); //muestra el menu de los eventos
                 MenuP();
                 break;
             case 'c':
-                MenuP();
+                ma.mostrarMenu();
                 break;
             case 's':
                 JOptionPane.showMessageDialog(null, "Gracias por usar el programa!");
