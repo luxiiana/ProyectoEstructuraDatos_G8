@@ -68,21 +68,21 @@ public class Lista {
        MenuPrincipal me = new MenuPrincipal();
        String nickb=JOptionPane.showInputDialog(null,"Digite su nickname: ");
        String contrab=JOptionPane.showInputDialog(null,"Digite su contraseña:");
-       if((inicio.getElemento().getNickname().equals(nickb)&& inicio.getElemento().getContrasena().equals(contrab))){
+       NodoC aux = inicio;
+       if((aux.getElemento().getNickname().equals(nickb)&& aux.getElemento().getContrasena().equals(contrab))){
            me.mostrarMenuPrincipal();
-       } else{
-           NodoC anterior;
-           NodoC auxiliar;
-           anterior=inicio;
-           auxiliar=inicio.getSiguiente();
-           while((auxiliar!=null)&&(!auxiliar.getElemento().getNickname().equals(nickb))&&(!auxiliar.getElemento().getContrasena().equals(contrab))){
-               anterior=anterior.getSiguiente();
-               auxiliar=auxiliar.getSiguiente();
+           aux = aux.getSiguiente();
+           while(aux!=inicio){
+               if((aux.getElemento().getNickname().equals(nickb)&& aux.getElemento().getContrasena().equals(contrab))){
+               me.mostrarMenuPrincipal();
+               aux = aux.getSiguiente();
+               }
            }
+       } 
 
           JOptionPane.showMessageDialog(null,"¡Usuario o contraseña incorrecta!");
        } 
-   }
+   
    
    
    public void mostrarLista(){
