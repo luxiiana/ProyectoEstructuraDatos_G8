@@ -69,6 +69,7 @@ public class Lista {
        String nickb=JOptionPane.showInputDialog(null,"Digite su nickname: ");
        String contrab=JOptionPane.showInputDialog(null,"Digite su contraseña:");
        NodoC aux = inicio;
+       
        if((aux.getElemento().getNickname().equals(nickb)&& aux.getElemento().getContrasena().equals(contrab))){
            me.mostrarMenuPrincipal();
            aux = aux.getSiguiente();
@@ -77,11 +78,11 @@ public class Lista {
                me.mostrarMenuPrincipal();
                aux = aux.getSiguiente();
                }
-           }
-       } 
-
-          JOptionPane.showMessageDialog(null,"¡Usuario o contraseña incorrecta!");
-       } 
+            }
+       }else{
+           JOptionPane.showMessageDialog(null,"¡Usuario o contraseña incorrecta!");
+       }    
+    } 
    
    
    
