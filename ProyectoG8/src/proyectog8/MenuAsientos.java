@@ -11,7 +11,7 @@ public class MenuAsientos {
     private char opcion = ' ';
     ListaAsientos la = new ListaAsientos();
 
-    public void mostrarMenu() {
+    public void mostrarMenuAsientos() {
         opcion = JOptionPane.showInputDialog(null, "***MENÚ PRINCIPAL***\n\n"
                 + "a. Agregar asiento\n"
                 + "b. Editar Asiento\n"
@@ -23,27 +23,27 @@ public class MenuAsientos {
         switch (opcion) {
             case 'a': {
                 la.agregarAsiento();
-                mostrarMenu();
+                mostrarMenuAsientos();
                 break;
             }
             case 'b': {
                 //la.mostrarElementos();
-                mostrarMenu();
+                mostrarMenuAsientos();
                 break;
             }
             case 'c': {
                 //la.mostrarElementos2();
-                mostrarMenu();
+                mostrarMenuAsientos();
                 break;
             }
             case 'd': {
                 la.hablilitarAsientos();
-                mostrarMenu();
+                mostrarMenuAsientos();
                 break;
             }
             case 'e': {
                 la.mostrarAsientos();
-                mostrarMenu();
+                mostrarMenuAsientos();
                 break;
             }
             case 'f': {

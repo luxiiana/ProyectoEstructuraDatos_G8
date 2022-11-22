@@ -7,39 +7,40 @@ public class MenuUsuarios {
     private Lista c=new Lista();
     Dato d = new Dato();
 
-    public void mostrarMenu() {
+    public void mostrarMenuUsuarios() {
         
         opc = Integer.parseInt(JOptionPane.showInputDialog(null,
-                "***USUARIOS***\n\n"
+                " ----𝐌𝐔𝐋𝐓𝐈𝐅𝐈𝐄𝐒𝐓𝐀𝐒----\n\n"
+                +"Menu principal\n"
                 + "1. Registrar usuario\n"
                 + "2. Iniciar Sesion\n"
                 + "3. Inactivar usuario\n"
-                + "4. Volver al menú principal\n\n"
+                + "4. Salir\n\n"
                 + "Digite su opción:"));
         
         switch (opc) {
             case 1:
                 c.agregar();
-                mostrarMenu();
+                mostrarMenuUsuarios();
                 break;
 
             case 2:
-                c.mostrarLista();
-                mostrarMenu();
+                c.iniciarSesion();
                 break;
 
             case 3:
+                c.mostrarLista();
                 c.desactivarusuario();
-                mostrarMenu();
+                mostrarMenuUsuarios();
                 break;
 
             case 4:
-                JOptionPane.showMessageDialog(null, "Volviendo al menú principal...");
+                JOptionPane.showMessageDialog(null, "Gracias por usar el programa!");
                 break;
 
             default:
-                JOptionPane.showMessageDialog(null, "Opción inválida, revise!");
-                mostrarMenu();
+                JOptionPane.showMessageDialog(null, "Opción inválida, intente de nuevo!");
+                mostrarMenuUsuarios();
                 break;
 
         }

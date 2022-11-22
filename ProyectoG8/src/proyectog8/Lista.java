@@ -47,7 +47,7 @@ public class Lista {
          String nomb=JOptionPane.showInputDialog(null,"Digite el nombre del usuario a eliminar:");
          if(inicio.getElemento().getNombre().equals(nomb)){
             inicio=inicio.getSiguiente();
-            JOptionPane.showMessageDialog(null,"¡Elemento extraído!");
+            JOptionPane.showMessageDialog(null,"¡Usuario eliminado!");
          }else{
             NodoC anterior;
             NodoC auxiliar;
@@ -64,6 +64,29 @@ public class Lista {
       }
    }
    
+   public void iniciarSesion(){
+       MenuPrincipal me = new MenuPrincipal();
+       String nickb=JOptionPane.showInputDialog(null,"Digite su nickname: ");
+       String contrab=JOptionPane.showInputDialog(null,"Digite su contraseña:");
+       if((inicio.getElemento().getNickname().equals(nickb)&& inicio.getElemento().getContrasena().equals(contrab))){
+           inicio=inicio.getSiguiente();
+           me.mostrarMenuPrincipal();
+       } else{
+           NodoC anterior;
+           NodoC auxiliar;
+           anterior=inicio;
+           auxiliar=inicio.getSiguiente();
+           while((auxiliar!=null)&&(!auxiliar.getElemento().getNickname().equals(nickb))&&(!auxiliar.getElemento().getContrasena().equals(contrab))){
+               anterior=anterior.getSiguiente();
+               auxiliar=auxiliar.getSiguiente();
+           }
+           if(auxiliar!=null){
+              anterior.setSiguiente(auxiliar.getSiguiente());
+           }
+          JOptionPane.showMessageDialog(null,"¡Usuario o contraseña incorrecta!");
+       } 
+   }
+   
    
    public void mostrarLista(){
       if(!esVaciaC()){
@@ -76,7 +99,7 @@ public class Lista {
          }
          JOptionPane.showMessageDialog(null,"La lista contiene:\n"+s);
       }else{
-         JOptionPane.showMessageDialog(null,"¡No se puede mostrar, lista vacía!");
+         JOptionPane.showMessageDialog(null,"¡No hay usuarios registrados!");
       }
    } 
     
