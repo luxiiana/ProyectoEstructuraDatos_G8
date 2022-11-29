@@ -14,7 +14,6 @@ public class MenuPrincipal {
     MenuAsientos ma = new MenuAsientos();
     
     
-    
     public void mostrarMenuPrincipal() {
         
         opc = Integer.parseInt(JOptionPane.showInputDialog(null,
@@ -37,7 +36,7 @@ public class MenuPrincipal {
                 break;
 
             case 3:
-                mu.mostrarMenuUsuarios();
+                //mu.mostrarMenuUsuarios();
                 break;
 
             default:

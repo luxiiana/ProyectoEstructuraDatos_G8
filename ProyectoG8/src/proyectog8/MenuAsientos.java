@@ -10,7 +10,7 @@ public class MenuAsientos {
 
     private char opcion = ' ';
     ListaAsientos la = new ListaAsientos();
-
+    
     public void mostrarMenuAsientos() {
         opcion = JOptionPane.showInputDialog(null, "***MENÚ PRINCIPAL***\n\n"
                 + "a. Agregar asiento\n"

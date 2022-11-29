@@ -1,10 +1,12 @@
+
 package proyectog8;
 
 import javax.swing.JOptionPane;
 
 public class Lista {
     private NodoC inicio;
-
+    private NodoC aux;
+    public int cont = 0;
    public Lista(){
      this.inicio=null;
    } 
@@ -16,7 +18,7 @@ public class Lista {
       }
    }
    
-   public void agregar(){
+   public NodoC agregar(NodoC nuevo){
       Dato d=new Dato();
       d.setNombre(JOptionPane.showInputDialog(null,
             "Ingrese su nombre:"));
@@ -29,7 +31,7 @@ public class Lista {
       d.setEstado(JOptionPane.showInputDialog(null,
             "Ingrese su estado activo/inactivo:"));
       
-      NodoC nuevo=new NodoC();
+      nuevo = new NodoC();
       nuevo.setElemento(d);
       if(esVaciaC()){
          inicio=nuevo;
@@ -40,6 +42,7 @@ public class Lista {
           nuevo.setSiguiente(aux.getSiguiente());
           aux.setSiguiente(nuevo);
       }
+      return aux;
    } 
    
    public void desactivarusuario(){
@@ -64,25 +67,26 @@ public class Lista {
       }
    }
    
-   public void iniciarSesion(){
+   public void iniciarSesion(NodoC aux){
        MenuPrincipal me = new MenuPrincipal();
+       MenuUsuarios meu = new MenuUsuarios();
        String nickb=JOptionPane.showInputDialog(null,"Digite su nickname: ");
        String contrab=JOptionPane.showInputDialog(null,"Digite su contraseña:");
-       NodoC aux = inicio;
-       
-       if((aux.getElemento().getNickname().equals(nickb)&& aux.getElemento().getContrasena().equals(contrab))){
-           me.mostrarMenuPrincipal();
-           aux = aux.getSiguiente();
-           while(aux!=inicio){
+       aux = inicio;
+           while(aux!=null){
                if((aux.getElemento().getNickname().equals(nickb)&& aux.getElemento().getContrasena().equals(contrab))){
-               me.mostrarMenuPrincipal();
-               aux = aux.getSiguiente();
+                   cont = 1;
+                   me.mostrarMenuPrincipal();
                }
+               else{
+                   JOptionPane.showMessageDialog(null,"¡Usuario o contraseña incorrecta!");   
+                   //meu.mostrarMenuUsuarios();
+               }
+               aux = aux.getSiguiente();
             }
-       }else{
-           JOptionPane.showMessageDialog(null,"¡Usuario o contraseña incorrecta!");
-       }    
-    } 
+       }
+           
+     
    
    
    
@@ -100,5 +104,6 @@ public class Lista {
          JOptionPane.showMessageDialog(null,"¡No hay usuarios registrados!");
       }
    } 
-    
+   
+   
 }
