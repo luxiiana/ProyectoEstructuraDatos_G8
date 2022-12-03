@@ -41,7 +41,7 @@ public class ListaAsientos {
     
     
     
-    /*public void llenarListaPre() {
+    public void llenarListaPre() {
         int contador = 0;
         for (int c = 0; c < 2; c++) {
             for (int x = 0; x < 10; x++) {
@@ -188,6 +188,6 @@ public class ListaAsientos {
         } else {
             //a partir de aqui se pone que el asiento no pudo ser eliminado porque estaba ocupado o algo asi
         }
-    }*/
+    }
 
 }

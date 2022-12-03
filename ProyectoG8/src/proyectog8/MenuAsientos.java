@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
  *
  * @author fabia
  */
-        /*
+        
 public class MenuAsientos {
 
     private char opcion = ' ';
@@ -14,8 +14,8 @@ public class MenuAsientos {
     
     public void mostrarMenuAsientos() {
         opcion = JOptionPane.showInputDialog(null, "***MENÚ PRINCIPAL***\n\n"
-                + "a. Agregar asiento\n"
-                + "b. Editar Asiento\n"
+                + "a. Elegir asiento\n"
+                + "b. \n"
                 + "c. Inactivar Asiento\n"
                 + "d. Habilitar Sala\n"
                 + "e. Mostrar Asientos\n"
@@ -39,11 +39,11 @@ public class MenuAsientos {
             }
             case 'd': {
                 la.hablilitarAsientos();
-                la.mostrarAsientos();
                 mostrarMenuAsientos();
                 break;
             }
             case 'e': {
+                la.mostrarAsientos();
                 mostrarMenuAsientos();
                 break;
             }
@@ -59,4 +59,3 @@ public class MenuAsientos {
     }
 
 }
-*/

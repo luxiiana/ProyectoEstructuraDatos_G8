@@ -2,7 +2,7 @@ package proyectog8;
 
 public class Asientos {
     
-    private String codArea="";
+    private String codArea=""; 
     private char preNor = ' ';
     private int numAsiento=0;
     private double costo=0;

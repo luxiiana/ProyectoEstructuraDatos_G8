@@ -33,12 +33,12 @@ public class listaEvento {
     }
 
     //-----------------------------MÉTODOS---------------------------------------
-    public int crearEvento(int numEventos) {
+    public char crearEvento(char agregar) {
 
         Evento e = new Evento();
 
-        if (numEventos == 0) {
-            return 0;
+        if (agregar == 'n') {
+            return 'n';
         } else {
             e.setNomEvento(JOptionPane.showInputDialog("Ingrese el nombre del nuevo evento: "));
 
@@ -115,7 +115,7 @@ public class listaEvento {
 
             e.setFecha("---FECHA DEL EVENTO---" + "\n\nDía: " + String.valueOf(e.getDia()) + "\nMes: " + e.getM() + "\nAño: " + String.valueOf(e.getAno()));
 
-            return crearEvento(numEventos - 1);
+            return crearEvento(agregar =JOptionPane.showInputDialog("¿Desea crear otro evento?\n-Si\n-No").toLowerCase().charAt(0));
         }
     }
 
@@ -170,7 +170,7 @@ public class listaEvento {
                                         e.setMes(JOptionPane.showInputDialog("Mes actual: " + e.getMes() + "\n\nElija el nuevo mes del evento: "
                                                 + "\na. Enero\nb. Febrero\nc. Marzo\nd. Abril\ne. Mayo\nf. Junio\ng. Julio"
                                                 + "\nh. Agosto\ni. Setiembre\nj. Octubre\nk. Noviembre\nl. Diciembre").toLowerCase().charAt(0));
-                                    } while (e.getMes() == ' ');
+                                    } while (e.getMes() != ' ');
 
                                     switch (e.getMes()) {
                                         case 'a':
@@ -317,5 +317,8 @@ public class listaEvento {
             }
         }
     }
-
+    
+    public void eliminarCompra(){
+        
+    }
 }

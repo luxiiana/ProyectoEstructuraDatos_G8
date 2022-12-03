@@ -68,7 +68,7 @@ public class Lista {
    }
    
    public void iniciarSesion(NodoC aux){
-       MenuPrincipal me = new MenuPrincipal();
+       MenuMultifiestas me = new MenuMultifiestas();
        MenuUsuarios meu = new MenuUsuarios();
        String nickb=JOptionPane.showInputDialog(null,"Digite su nickname: ");
        String contrab=JOptionPane.showInputDialog(null,"Digite su contraseña:");
@@ -76,7 +76,7 @@ public class Lista {
            while(aux!=null){
                if((aux.getElemento().getNickname().equals(nickb)&& aux.getElemento().getContrasena().equals(contrab))){
                    cont = 1;
-                   me.mostrarMenuPrincipal();
+                   me.mostrarMenuMultifiestas();
                }
                else{
                    JOptionPane.showMessageDialog(null,"¡Usuario o contraseña incorrecta!");   
