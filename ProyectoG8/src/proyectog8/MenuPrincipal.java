@@ -11,7 +11,7 @@ public class MenuPrincipal {
     MenuEventos me = new MenuEventos();
     
     //Menú de los asientos
-    MenuAsientos ma = new MenuAsientos();
+    //MenuAsientos ma = new MenuAsientos();
     
     
     public void mostrarMenuPrincipal() {
@@ -19,9 +19,10 @@ public class MenuPrincipal {
         opc = Integer.parseInt(JOptionPane.showInputDialog(null,
                 " ----𝐌𝐔𝐋𝐓𝐈𝐅𝐈𝐄𝐒𝐓𝐀𝐒----\n\n"
                 +"Menu principal\n"
-                + "1. Ver eventos\n"
-                + "2. Ver asientos\n"
-                + "3. Salir\n\n"
+                + "1. Menu eventos\n"
+                + "2. Menu asientos\n"
+                + "3. Menu Usuarios\n"
+                + "4. Salir\n\n"
                 + "Digite su opción:"));
         
         switch (opc) {
@@ -31,13 +32,16 @@ public class MenuPrincipal {
                 break;
 
             case 2:
-                ma.mostrarMenuAsientos();
+                //ma.mostrarMenuAsientos();
                 mostrarMenuPrincipal();
                 break;
 
             case 3:
-                //mu.mostrarMenuUsuarios();
+                mu.mostrarMenuUsuarios();
+                mostrarMenuPrincipal();
                 break;
+            case 4:
+                
 
             default:
                 JOptionPane.showMessageDialog(null, "Opción inválida, intente de nuevo!");

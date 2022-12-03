@@ -6,13 +6,14 @@ import javax.swing.JOptionPane;
  *
  * @author fabia
  */
+        /*
 public class MenuAsientos {
 
-    //private char opcion = ' ';
+    private char opcion = ' ';
     ListaAsientos la = new ListaAsientos();
     
     public void mostrarMenuAsientos() {
-        /*opcion = JOptionPane.showInputDialog(null, "***MENÚ PRINCIPAL***\n\n"
+        opcion = JOptionPane.showInputDialog(null, "***MENÚ PRINCIPAL***\n\n"
                 + "a. Agregar asiento\n"
                 + "b. Editar Asiento\n"
                 + "c. Inactivar Asiento\n"
@@ -54,7 +55,8 @@ public class MenuAsientos {
                 JOptionPane.showMessageDialog(null,
                         "Opción incorrecta!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }*/
+        }
     }
 
 }
+*/
