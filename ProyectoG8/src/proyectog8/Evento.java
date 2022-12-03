@@ -10,7 +10,11 @@ public class Evento {
     
     private char ano = ' ';
     
-    private char lugar = 0;
+    private char lugar = ' ';
+    
+    private String m = " ";
+    
+    private String fecha = " ";
     
     public Evento(){
         this.nomEvento=null;
@@ -58,6 +62,22 @@ public class Evento {
 
     public void setLugar(char lugar) {
         this.lugar = lugar;
+    }
+
+    public String getM() {
+        return m;
+    }
+
+    public void setM(String m) {
+        this.m = m;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
     
 }

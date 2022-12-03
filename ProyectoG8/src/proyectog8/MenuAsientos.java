@@ -8,11 +8,11 @@ import javax.swing.JOptionPane;
  */
 public class MenuAsientos {
 
-    private char opcion = ' ';
+    //private char opcion = ' ';
     ListaAsientos la = new ListaAsientos();
     
     public void mostrarMenuAsientos() {
-        opcion = JOptionPane.showInputDialog(null, "***MENÚ PRINCIPAL***\n\n"
+        /*opcion = JOptionPane.showInputDialog(null, "***MENÚ PRINCIPAL***\n\n"
                 + "a. Agregar asiento\n"
                 + "b. Editar Asiento\n"
                 + "c. Inactivar Asiento\n"
@@ -22,7 +22,7 @@ public class MenuAsientos {
                 + "Digite su opción:").toLowerCase().charAt(0);
         switch (opcion) {
             case 'a': {
-                la.agregarAsiento();
+                la.comprarAsiento();
                 mostrarMenuAsientos();
                 break;
             }
@@ -38,11 +38,11 @@ public class MenuAsientos {
             }
             case 'd': {
                 la.hablilitarAsientos();
+                la.mostrarAsientos();
                 mostrarMenuAsientos();
                 break;
             }
             case 'e': {
-                la.mostrarAsientos();
                 mostrarMenuAsientos();
                 break;
             }
@@ -54,7 +54,7 @@ public class MenuAsientos {
                 JOptionPane.showMessageDialog(null,
                         "Opción incorrecta!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
+        }*/
     }
 
 }

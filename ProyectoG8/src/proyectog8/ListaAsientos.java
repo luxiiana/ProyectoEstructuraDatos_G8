@@ -2,15 +2,46 @@ package proyectog8;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Fabian
- */
 public class ListaAsientos {
+    
+    private nodoAsiento inicio;
+    private nodoAsiento fin;
 
-    String listaAsientos[][] = new String[4][10];
+    //String listaAsientos[][] = new String[4][10];
+    
+    int c=10;
+    int f=10;
+    
+    String listaAsientos[][]=new String[f][c];
+    
+    public ListaAsientos() {
+        this.inicio = null;
+        this.fin = null;
 
-    public void llenarListaPre() {
+    }
+    
+    
+    //------------VALIDACIONES-----------------
+    
+    public boolean esVacia() {
+        if (inicio == null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    
+    public void ocupado(){
+        
+    }
+
+    //---------------METODOS-------------------
+    
+    
+    
+    
+    /*public void llenarListaPre() {
         int contador = 0;
         for (int c = 0; c < 2; c++) {
             for (int x = 0; x < 10; x++) {
@@ -93,25 +124,7 @@ public class ListaAsientos {
 
     }
 
-    private nodoAsiento inicio;
-    private nodoAsiento fin;
-
-    public ListaAsientos() {
-        this.inicio = null;
-        this.fin = null;
-
-    }
-
-    public boolean esVacia() {
-        if (inicio == null) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    public void agregarAsiento() {
+    public void comprarAsiento() {
         Asientos a = new Asientos();
         mostrarAsientos();
         a.setCodArea(JOptionPane.showInputDialog("Digite el codigo de asiento que desea (PRE/NOR) y su numero de asiento (1-20)   (PRE: 5000 Colones NOR: 10000 colones) "));
@@ -175,6 +188,6 @@ public class ListaAsientos {
         } else {
             //a partir de aqui se pone que el asiento no pudo ser eliminado porque estaba ocupado o algo asi
         }
-    }
+    }*/
 
 }
