@@ -6,5 +6,11 @@ public class main {
         
         MenuUsuarios me = new MenuUsuarios();
         me.mostrarMenuUsuarios();
+        
+        //Pruebas Montero (dejenlo ahi comentado)
+        //MenuAsientos ma = new MenuAsientos();
+        //ma.mostrarMenuAsientos();
+        
+        
     }
 }

@@ -15,7 +15,7 @@ public class MenuAsientos {
     public void mostrarMenuAsientos() {
         opcion = JOptionPane.showInputDialog(null, "***MENÚ PRINCIPAL***\n\n"
                 + "a. Elegir asiento\n"
-                + "b. \n"
+                + "b. Cambiar de Asiento\n"
                 + "c. Inactivar Asiento\n"
                 + "d. Habilitar Sala\n"
                 + "e. Mostrar Asientos\n"
@@ -28,7 +28,7 @@ public class MenuAsientos {
                 break;
             }
             case 'b': {
-                //la.mostrarElementos();
+                la.editarAsiento();
                 mostrarMenuAsientos();
                 break;
             }

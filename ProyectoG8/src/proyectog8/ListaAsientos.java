@@ -3,26 +3,22 @@ package proyectog8;
 import javax.swing.JOptionPane;
 
 public class ListaAsientos {
-    
+
     private nodoAsiento inicio;
     private nodoAsiento fin;
 
-    //String listaAsientos[][] = new String[4][10];
-    
-    int c=10;
-    int f=10;
-    
-    String listaAsientos[][]=new String[f][c];
-    
+    String listaAsientos[][] = new String[4][10];
+
+    //int c=10;
+    //int f=10;
+    //String listaAsientos[][]=new String[f][c];
     public ListaAsientos() {
         this.inicio = null;
         this.fin = null;
 
     }
-    
-    
+
     //------------VALIDACIONES-----------------
-    
     public boolean esVacia() {
         if (inicio == null) {
             return true;
@@ -31,16 +27,12 @@ public class ListaAsientos {
         }
 
     }
-    
-    public void ocupado(){
-        
+
+    public void ocupado() {
+
     }
 
     //---------------METODOS-------------------
-    
-    
-    
-    
     public void llenarListaPre() {
         int contador = 0;
         for (int c = 0; c < 2; c++) {
@@ -48,13 +40,13 @@ public class ListaAsientos {
                 contador = contador + 1;
                 if (contador > 0 && contador < 10) {
 
-                    listaAsientos[c][x] = "PRE0" + contador + "   ";
+                    listaAsientos[c][x] = "PRE0" + contador + "    ";
                 } else if (contador == 10) {
-                    listaAsientos[c][x] = "PRE" + contador + "   ";
+                    listaAsientos[c][x] = "PRE" + contador + "    ";
                 } else if (contador == 11) {
-                    listaAsientos[c][x] = "\n" + "PRE" + contador + "   ";
+                    listaAsientos[c][x] = "\n" + "PRE" + contador + "    ";
                 } else if (contador > 11 && contador <= 20) {
-                    listaAsientos[c][x] = "PRE" + contador + "   ";
+                    listaAsientos[c][x] = "PRE" + contador + "    ";
 
                 }
             }
@@ -78,13 +70,13 @@ public class ListaAsientos {
                 contador = contador + 1;
                 if (contador > 0 && contador < 10) {
 
-                    listaAsientos[c][x] = "NOR0" + contador + "   ";
+                    listaAsientos[c][x] = "NOR0" + contador + "    ";
                 } else if (contador == 10) {
-                    listaAsientos[c][x] = "NOR" + contador + "   ";
+                    listaAsientos[c][x] = "NOR" + contador + "    ";
                 } else if (contador == 11) {
-                    listaAsientos[c][x] = "\n" + "NOR" + contador + "   ";
+                    listaAsientos[c][x] = "\n" + "NOR" + contador + "    ";
                 } else if (contador > 11 && contador <= 20) {
-                    listaAsientos[c][x] = "NOR" + contador + "   ";
+                    listaAsientos[c][x] = "NOR" + contador + "    ";
 
                 }
             }
@@ -94,8 +86,19 @@ public class ListaAsientos {
     public void ocuparAsiento(String asiento) {
         for (int c = 0; c < 4; c++) {
             for (int x = 0; x < 10; x++) {
-                if (listaAsientos[c][x].equalsIgnoreCase(asiento + "   ")) {
-                    listaAsientos[c][x] = "*****   ";
+                if (listaAsientos[c][x].equalsIgnoreCase(asiento + "    ")) {
+                    listaAsientos[c][x] = asiento + "*   ";
+
+                }
+            }
+        }
+    }
+
+    public void desocuparAsiento(String asiento) {
+        for (int c = 0; c < 4; c++) {
+            for (int x = 0; x < 10; x++) {
+                if (listaAsientos[c][x].equalsIgnoreCase(asiento + "*   ")) {
+                    listaAsientos[c][x] = asiento + "    ";
 
                 }
             }
@@ -119,8 +122,10 @@ public class ListaAsientos {
     }
 
     public void mostrarAsientos() {
+        System.out.println("\nLos asientos que contengan un (*) se encuentran ocupados");
         mostrarListaPre();
         mostrarListaNor();
+        System.out.println("\n");
 
     }
 
@@ -128,15 +133,19 @@ public class ListaAsientos {
         Asientos a = new Asientos();
         mostrarAsientos();
         a.setCodArea(JOptionPane.showInputDialog("Digite el codigo de asiento que desea (PRE/NOR) y su numero de asiento (1-20)   (PRE: 5000 Colones NOR: 10000 colones) "));
-        //a.setNumAsiento(Integer.parseInt(JOptionPane.showInputDialog("digite el numero de asiento que desea (1-20) ")));
-        if (a.getCodArea().equalsIgnoreCase("PRE")) {
-            a.setCosto(5000);
-        } else if (a.getCodArea().equalsIgnoreCase("NOR")) {
-            a.setCosto(10000);
+
+        for (int i = 0; i < 21; i++) {
+            if (a.getCodArea().equalsIgnoreCase("PRE" + i) || a.getCodArea().equalsIgnoreCase("PRE0" + i)) {
+                a.setCosto(5000);
+            } else if (a.getCodArea().equalsIgnoreCase("NOR" + i) || a.getCodArea().equalsIgnoreCase("NOR0" + i)) {
+                a.setCosto(10000);
+            }
         }
+
         a.setLibOcu('O');
         ocuparAsiento(a.getCodArea());
         JOptionPane.showMessageDialog(null, "¡Asiento seleccionado!");
+
         nodoAsiento nuevo = new nodoAsiento();
         nuevo.setDato(a);
         if (esVacia()) {
@@ -168,19 +177,64 @@ public class ListaAsientos {
     }
 
     public void editarAsiento() {
+
+        int encontrado = 0;
         nodoAsiento aux = inicio;
-        if (aux != null) {
-            while (aux.getSiguiente() != inicio) {
-                if (aux.getDato().equals(aux.getDato().getNumAsiento())) {
-                    // aqui verifica el asiento y pueden todo lo que se va a editar como la disponibilidad y eso
+        String asiento = JOptionPane.showInputDialog("Digite el codigo de asiento que desea cambiar (PRE/NOR) y su numero de asiento (1-20) ");
+        if (aux.getDato().getCodArea().equalsIgnoreCase(asiento)) {
+
+            JOptionPane.showMessageDialog(null, "Asiento encontrado ");
+            encontrado = 1;
+            desocuparAsiento(aux.getDato().getCodArea());
+            aux.getDato().setCodArea(JOptionPane.showInputDialog("Digite el codigo de asiento que desea (PRE/NOR) y su numero de asiento (1-20)   (PRE: 5000 Colones NOR: 10000 colones) "));
+            ocuparAsiento(aux.getDato().getCodArea());
+
+            for (int i = 0; i < 21; i++) {
+                if (aux.getDato().getCodArea().equalsIgnoreCase("PRE" + i) || aux.getDato().getCodArea().equalsIgnoreCase("PRE0" + i)) {
+                    aux.getDato().setCosto(5000);
+                } else if (aux.getDato().getCodArea().equalsIgnoreCase("NOR" + i) || aux.getDato().getCodArea().equalsIgnoreCase("NOR0" + i)) {
+                    aux.getDato().setCosto(10000);
                 }
             }
+            aux.getDato().setLibOcu('L');
+            JOptionPane.showMessageDialog(null, "¡Asiento seleccionado!");
 
         }
+
+        aux = aux.getSiguiente();
+        while (aux != inicio) {
+            if (aux.getDato().getCodArea().equalsIgnoreCase(asiento)) {
+
+                JOptionPane.showMessageDialog(null, "Asiento encontrado ");
+                encontrado = 1;
+                desocuparAsiento(aux.getDato().getCodArea());
+                aux.getDato().setCodArea(JOptionPane.showInputDialog("Digite el codigo de asiento que desea (PRE/NOR) y su numero de asiento (1-20)   (PRE: 5000 Colones NOR: 10000 colones) "));
+                ocuparAsiento(aux.getDato().getCodArea());
+
+                for (int i = 0; i < 21; i++) {
+                    if (aux.getDato().getCodArea().equalsIgnoreCase("PRE" + i)) {
+                        aux.getDato().setCosto(5000);
+                    } else if (aux.getDato().getCodArea().equalsIgnoreCase("NOR" + i)) {
+                        aux.getDato().setCosto(10000);
+                    }
+                }
+                aux.getDato().setLibOcu('O');
+                JOptionPane.showMessageDialog(null, "¡Asiento seleccionado!");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El asiento seleccionado no fue encontrado ");
+            }
+
+            aux = aux.getSiguiente();
+        }
+        if (encontrado != 1) {
+            JOptionPane.showMessageDialog(null, "El asiento seleccionado no fue encontrado, intente nuevamente ");
+        }
+
     }
 
     public void eliminarAsiento() {
-        if (!esVacia()) {
+        /*if (!esVacia()) {
             inicio = inicio.getSiguiente();
             fin.setSiguiente(inicio);
             inicio.setAnterior(fin);
@@ -188,6 +242,34 @@ public class ListaAsientos {
         } else {
             //a partir de aqui se pone que el asiento no pudo ser eliminado porque estaba ocupado o algo asi
         }
-    }
+    }*/
+        try {
+            if (!esVacia()) {
+                String asiento = JOptionPane.showInputDialog(null, "Digite el nombre del asiento a eliminar");
+                if (asiento.equals(inicio.getDato().getCodArea())) {
+                    inicio = inicio.getSiguiente();
+                    fin.setSiguiente(inicio);
+                    inicio.setAnterior(fin);
+                    JOptionPane.showMessageDialog(null, "El elemento fue extraido");
+                } else {
+                    nodoAsiento auxiliar;
+                    nodoAsiento anterior;
+                    anterior = inicio;
+                    auxiliar = inicio.getSiguiente();
+                    while ((auxiliar != inicio) && (auxiliar.getDato().getCodArea().equals(asiento))) {
+                        anterior = anterior.getSiguiente();
+                        auxiliar = auxiliar.getSiguiente();
+                    }
+                    if (auxiliar != inicio) {
+                        anterior.setSiguiente(auxiliar.getSiguiente());
+                        fin.setSiguiente(inicio);
+                    }
+                }
+            }
 
+        } catch (Exception ex01) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer");
+        }
+
+    }
 }
