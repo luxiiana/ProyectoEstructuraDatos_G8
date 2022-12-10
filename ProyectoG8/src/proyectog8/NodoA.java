@@ -3,7 +3,9 @@ package proyectog8;
 
 
 public class NodoA {
-     private Dato elemento;
+     private Dato usuario;
+     private Evento evento;
+     private Asientos asiento;
     private NodoA enlaceIzq;
     private NodoA enladeDer;
     
@@ -14,13 +16,17 @@ public class NodoA {
         
     }
 
-    public Dato getElemento() {
-        return elemento;
+    public Dato getUsuario() {
+        return usuario;
     }
 
-    public void setElemento(Dato elemento) {
-        this.elemento = elemento;
-    } 
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public Asientos getAsiento() {
+        return asiento;
+    }
 
     public NodoA getEnlaceIzq() {
         return enlaceIzq;

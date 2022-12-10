@@ -1,5 +1,7 @@
 package proyectog8;
 
+import javax.swing.JOptionPane;
+
 public class arbolVentas {
     private NodoA raiz;
     /*
@@ -23,4 +25,56 @@ public class arbolVentas {
            return false;
        }
    }
+      
+      public void agregarAlArbol(){
+          Dato d =new Dato();
+          Evento e=new Evento();
+          Asientos a=new Asientos();
+          d.getNickname();
+          e.getNomEvento();
+          a.getNumAsiento();
+          NodoA nuevo=new NodoA();
+       if(EsVacio()){
+           raiz=nuevo;
+       }else{
+           insertarNuevo(raiz,nuevo);
+       }
+          
+      
 }
+      
+       public void insertarNuevo(NodoA raiz,NodoA nuevo){
+           if(raiz.getEnlaceIzq()==null){
+               raiz.setEnlaceIzq(nuevo);
+           }else{
+               insertarNuevo(raiz.getEnlaceIzq(), nuevo);
+           }
+           if(raiz.getEnladeDer()==null && raiz.getEnlaceIzq()!=null){
+               raiz.setEnladeDer(nuevo);
+           }else{
+               insertarNuevo(raiz.getEnladeDer(), nuevo);
+           }
+       }
+       
+          public void mostrarRaiz(){
+       if(EsVacio()){
+           mostrarNodo(raiz);
+       }else{
+           JOptionPane.showMessageDialog(null,"no se puede mostrar arbol vacio");
+       }
+   }
+   
+   public void mostrarNodo(NodoA raiz){
+       if(raiz!=null){
+           mostrarNodo(raiz.getEnlaceIzq());
+           System.out.println(raiz.getUsuario().getNombre());
+           System.out.println(raiz.getEvento().getNomEvento());
+           System.out.println(raiz.getAsiento().getNumAsiento());
+                  
+           mostrarNodo(raiz.getEnladeDer());
+       }
+       
+   }
+       }
+       
+
