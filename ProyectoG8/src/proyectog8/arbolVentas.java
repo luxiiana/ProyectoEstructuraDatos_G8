@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 public class arbolVentas {
 
     private NodoA raiz;
+    public nodoEvento inicio;
+    
 
     /*
     Métodos que hay que hacer
@@ -26,22 +28,39 @@ public class arbolVentas {
             return false;
         }
     }
+    public boolean existe(Evento evento) {
+        nodoEvento aux = inicio ;
+        while (!aux.equals(evento)) {
+            aux = aux.getSiguiente();
+        }
+        if ((aux.equals(evento)) && (evento.equals(aux.getElemento()))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public void agregarAlArbol() {
         Dato d = new Dato();
         Evento e = new Evento();
         Asientos a = new Asientos();
-        d.getNickname(); //esto está bien, es el usuario
-        e.getNomEvento(); //esto no, el usuario ingresa uno y debe verificar que conincida con los eventos que ya existen
-        a.getNumAsiento(); //acá debería elegir el asiento
+        d.getNickname(); 
+        do{
+        e.setNomEvento(JOptionPane.showInputDialog("digite el nombre del evento al que desea asistir")); 
+        if(!existe(e)){
+            JOptionPane.showMessageDialog(null,"no existe el evento");
+        }
+        }while(!existe(e));
+        
+        a.setNumAsiento(Integer.parseInt(JOptionPane.showInputDialog("Digite el numero de asiento"))); 
         NodoA nuevo = new NodoA();
         if (EsVacio()) {
             raiz = nuevo;
         } else {
             insertarNuevo(raiz, nuevo);
         }
-
     }
+    
 
     public void insertarNuevo(NodoA raiz, NodoA nuevo) {
         if (raiz.getEnlaceIzq() == null) {
@@ -75,8 +94,22 @@ public class arbolVentas {
         }
 
     }
+    
+    
+    public void modificarArbol(){
+    Dato d = new Dato();
+    if(raiz.getEnladeDer()!=null){
+        d.setNickname(JOptionPane.showInputDialog("digite el nombre que desea modificar"));
+    
+    }else{
+        if(raiz.getEnlaceIzq()!=null){
+        d.setNickname(JOptionPane.showInputDialog("digite el nombre que desea modificar"));
+    }}
+    
+    }
+    
 
-    public NodoA eliminarNodo(NodoA nuevo, Evento evento) {
+    public void eliminarNodo(NodoA nuevo, Evento evento) {
         if (raiz != null) {
             if (evento.equals(nuevo.getEvento())) {
                 if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() == null) {
@@ -93,7 +126,7 @@ public class arbolVentas {
                                 NodoA temp = sucesor(der);
 
                                 temp.getEnlaceIzq(raiz.getEnlaceIzq());
-                                return temp;
+                               
                             }
 
                         }
@@ -104,7 +137,7 @@ public class arbolVentas {
                 }
             }
         }
-        return raiz;
+       
     }
 
     public NodoA sucesor(NodoA raiz) {
