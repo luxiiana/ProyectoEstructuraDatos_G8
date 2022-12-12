@@ -31,9 +31,9 @@ public class arbolVentas {
         Dato d = new Dato();
         Evento e = new Evento();
         Asientos a = new Asientos();
-        d.getNickname();
-        e.getNomEvento();
-        a.getNumAsiento();
+        d.getNickname(); //esto está bien, es el usuario
+        e.getNomEvento(); //esto no, el usuario ingresa uno y debe verificar que conincida con los eventos que ya existen
+        a.getNumAsiento(); //acá debería elegir el asiento
         NodoA nuevo = new NodoA();
         if (EsVacio()) {
             raiz = nuevo;

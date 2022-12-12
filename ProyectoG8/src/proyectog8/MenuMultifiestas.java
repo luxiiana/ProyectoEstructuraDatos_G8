@@ -3,7 +3,7 @@ package proyectog8;
 import javax.swing.JOptionPane;
 
 public class MenuMultifiestas {
-    private int opc;
+    private char opc;
     //Menú de los usuarios
     MenuUsuarios mu = new MenuUsuarios();
     
@@ -12,35 +12,38 @@ public class MenuMultifiestas {
     
     //Menú de los asientos
      MenuAsientos ma = new MenuAsientos();
-    
+     
+     //Menú de árbol
+     arbolVentas a =new arbolVentas();
+     menuArbol mv =new menuArbol();
     
     public void mostrarMenuMultifiestas() {
         
-        opc = Integer.parseInt(JOptionPane.showInputDialog(null,
+        opc = JOptionPane.showInputDialog(null,
                 " ----𝐌𝐔𝐋𝐓𝐈𝐅𝐈𝐄𝐒𝐓𝐀𝐒----\n\n"
                 +"Menu principal\n"
-                + "1. Eventos\n" //Crear evento - editar evento - eliminar evento
-                + "2. Comprar\n" //Comprar entrada - editar compra - eliminar compra
-                + "3. Mostrar Ventas\n" //muestra arbol
-                + "4. Salir\n\n"
-                + "Digite su opción:"));
+                + "a. Eventos\n" //Crear evento - editar evento - eliminar evento
+                + "b. Menu de compra\n" //Comprar entrada - editar compra - eliminar compra
+                + "c. Mostrar ventas\n" //muestra arbol o ventas
+                + "s. Salir\n\n"
+                + "Digite su opción:").toLowerCase().charAt(0);
         
         switch (opc) {
-            case 1:
+            case 'a':
                 me.mostrarMenuEventos();
                 mostrarMenuMultifiestas();
                 break;
 
-            case 2:
-                //mostrar menu de compra
+            case 'b':
+                mv.menuArbol();
                 mostrarMenuMultifiestas();
                 break;
 
-            case 3:
-                //muestra datos del arbol
+            case 'c':
+                a.mostrarRaiz();
                 mostrarMenuMultifiestas();
                 break;
-            case 4:
+            case 's':
                 JOptionPane.showMessageDialog(null, "Cerrando sesión");
                 mu.mostrarMenuUsuarios();
                 break;

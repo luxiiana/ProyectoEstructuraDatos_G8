@@ -3,28 +3,28 @@ package proyectog8;
 import javax.swing.JOptionPane;
 
 public class MenuUsuarios {
-    private int opc;
+    private char opc;
     private NodoC aux = null;
     private Lista c=new Lista();
     Dato d = new Dato();
     public void mostrarMenuUsuarios() {
     
-        opc = Integer.parseInt(JOptionPane.showInputDialog(null,
+        opc = JOptionPane.showInputDialog(null,
                 " ----𝐌𝐔𝐋𝐓𝐈𝐅𝐈𝐄𝐒𝐓𝐀𝐒----\n\n"
                 +"Menu principal\n"
-                + "1. Registrar usuario\n"
-                + "2. Iniciar Sesion\n"
-                + "3. Inactivar usuario\n"
-                + "4. Salir\n\n"
-                + "Digite su opción:"));
+                + "a. Registrar usuario\n"
+                + "b. Iniciar Sesion\n"
+                + "c. Inactivar usuario\n"
+                + "s. Salir\n\n"
+                + "Digite su opción:").toLowerCase().charAt(0);
         
         switch (opc) {
-            case 1:
+            case 'a':
                 aux = c.agregar(aux);
                 mostrarMenuUsuarios();
                 break;
 
-            case 2:
+            case 'b':
                 c.iniciarSesion(aux);
                 if(c.cont==0){
                     
@@ -33,13 +33,13 @@ public class MenuUsuarios {
                 c.cont = 0;
                 break;
 
-            case 3:
+            case 'c':
                 c.mostrarLista();
                 c.desactivarusuario();
                 mostrarMenuUsuarios();
                 break;
 
-            case 4:
+            case 's':
                 JOptionPane.showMessageDialog(null, "Gracias por usar el programa!");
                 break;
 

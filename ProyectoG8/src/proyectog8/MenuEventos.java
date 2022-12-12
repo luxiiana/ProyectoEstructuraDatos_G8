@@ -11,7 +11,7 @@ public class MenuEventos {
     public void mostrarMenuEventos(){
         
         opc=JOptionPane.showInputDialog("---EVENTOS---\n\na. Crear evento\nb. Editar evento"
-                + "\nc. Eliminar evento\ns. SALIR").toLowerCase().charAt(0);
+                + "\nc. Eliminar evento\nd. Ver eventos\ns. Volver al menú principal").toLowerCase().charAt(0);
         
         switch(opc){
             case 'a':
@@ -23,11 +23,14 @@ public class MenuEventos {
                 l.editarEvento(editar);
                 break;
             case 'c':
-                char eliminar=JOptionPane.showInputDialog("¿Desea eliminar un evento?\n-Si\n-No").toLowerCase().charAt(0);
+                char eliminar=JOptionPane.showInputDialog("¿Desea continuar a eliminar un evento?\n-Si\n-No").toLowerCase().charAt(0);
                 l.eliminarEventos(eliminar);
                 break;
+            case 'd':
+                l.mostrarEventos();
+                break;
             case 's':
-                JOptionPane.showMessageDialog(null, "Saliendo...");
+                JOptionPane.showMessageDialog(null, "Volviendo al menú principal...");
                 break;
         }
         

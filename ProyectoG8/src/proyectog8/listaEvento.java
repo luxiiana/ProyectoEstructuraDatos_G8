@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class listaEvento {
 
-    private Evento e = new Evento();
+    private nodoEvento n=new nodoEvento();
     private nodoEvento inicio;
 
     public listaEvento() {
@@ -25,7 +25,7 @@ public class listaEvento {
         while (!aux.equals(evento)) {
             aux = aux.getSiguiente();
         }
-        if ((aux.equals(evento)) && (evento.equals(e.getNomEvento()))) {
+        if ((aux.equals(evento)) && (evento.equals(aux.getElemento()))) {
             return true;
         } else {
             return false;
@@ -42,11 +42,6 @@ public class listaEvento {
         } else {
             e.setNomEvento(JOptionPane.showInputDialog("Ingrese el nombre del nuevo evento: "));
 
-            /*JOptionPane.showMessageDialog(null, "---FECHA---\nAcontinuación complete: "
-                    + "\n-Día (como 1, 2 , 3...etc)\n-Mes (mayo, agosto, octubre...etc)\n-Año (2022, 2023, 2024,...etc)");
-            e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día del evento: ")));
-            e.setMes(JOptionPane.showInputDialog("Ingrese el mes del evento: "));
-            e.setAno(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el año del evento:")));*/
             JOptionPane.showMessageDialog(null, "A continuación ingresará la fecha:");
 
             //--------------MES-------------
@@ -99,15 +94,15 @@ public class listaEvento {
             if (e.getMes() == 'b') {
                 do {
                     e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día del evento: ")));
-                } while (e.getDia() < 29);
+                } while (e.getDia() > 29);
             } else if (e.getMes() == 'd' || e.getMes() == 'f' || e.getMes() == 'i' || e.getMes() == 'k') {
                 do {
                     e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día del evento: ")));
-                } while (e.getDia() < 31);
+                } while (e.getDia() > 30);
             } else {
                 do {
                     e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día del evento: ")));
-                } while (e.getDia() < 32);
+                } while (e.getDia() > 31);
             }
 
             //-------------AÑO---------------
@@ -115,13 +110,33 @@ public class listaEvento {
 
             e.setFecha("---FECHA DEL EVENTO---" + "\n\nDía: " + String.valueOf(e.getDia()) + "\nMes: " + e.getM() + "\nAño: " + String.valueOf(e.getAno()));
 
-            return crearEvento(agregar =JOptionPane.showInputDialog("¿Desea crear otro evento?\n-Si\n-No").toLowerCase().charAt(0));
+            nodoEvento n = new nodoEvento();
+            n.setElemento(e);
+
+            if (esVacio()) {
+                inicio = n;
+            } else if (e.getNomEvento().compareTo(inicio.getElemento().getNomEvento())<0) {
+                n.setSiguiente(inicio);
+                inicio = n;
+            } else if (inicio.getSiguiente() == null) {
+                inicio.setSiguiente(n);
+            } else {
+                nodoEvento aux = inicio;
+                while ((aux.getSiguiente() != null) && (aux.getSiguiente().getElemento().getNomEvento().compareTo(e.getNomEvento()))<0) {
+                    aux = aux.getSiguiente();
+                }
+                n.setSiguiente(aux.getSiguiente());
+                aux.setSiguiente(n);
+            }
+
+            return crearEvento(agregar = JOptionPane.showInputDialog("¿Desea crear otro evento?\n-Si\n-No").toLowerCase().charAt(0));
         }
     }
 
     public char editarEvento(char editar) {
+        nodoEvento n=new nodoEvento();
+        Evento e = new Evento();
         if (editar == 'n') {
-            JOptionPane.showMessageDialog(null, "¡Evento editado!");
             return editar = 'n';
         } else {
             if (!esVacio()) {
@@ -135,12 +150,12 @@ public class listaEvento {
                 } while (!existe(evento));
 
                 nodoEvento aux = inicio;
-                while ((aux != null) && (aux.equals(e.getNomEvento()))) { //Si aux no cae en vacío y es igual a el nombre de un evento del nodo
+                while ((aux != null) && (aux.equals(n.getElemento().getNomEvento()))) { //Si aux no cae en vacío y es igual a el nombre de un evento del nodo
                     char opc = ' ';
                     opc = JOptionPane.showInputDialog("¿Qué desea editar?\na. Nombre del evento \nb.Fecha\nc. Salir al menú principal").toLowerCase().charAt(0);
                     switch (opc) {
                         case 'a':
-                            e.setNomEvento(JOptionPane.showInputDialog("Nombre actual:\n" + e.getNomEvento() + "\nIngrese el nuevo nombre del nuevo evento: "));
+                            n.getElemento().setNomEvento(JOptionPane.showInputDialog("Nombre actual:\n" + n.getElemento().getNomEvento() + "\nIngrese el nuevo nombre del nuevo evento: "));
                             JOptionPane.showMessageDialog(null, "Nuevo nombre del evento: " + e.getNomEvento());
                             break;
                         case 'b':
@@ -151,28 +166,28 @@ public class listaEvento {
 
                             switch (edita) {
                                 case 'a':
-                                    if (e.getMes() == 'b') {
+                                    if (n.getElemento().getMes() == 'b') {
                                         do {
-                                            e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Día actual: " + e.getDia() + "\nIngrese el día del evento: ")));
-                                        } while (e.getDia() < 29);
-                                    } else if (e.getMes() == 'd' || e.getMes() == 'f' || e.getMes() == 'i' || e.getMes() == 'k') {
+                                            n.getElemento().setDia(Integer.parseInt(JOptionPane.showInputDialog("Día actual: " + n.getElemento().getDia() + "\nIngrese el día del evento: ")));
+                                        } while (n.getElemento().getDia() > 29);
+                                    } else if (n.getElemento().getMes() == 'd' || n.getElemento().getMes() == 'f' || n.getElemento().getMes() == 'i' || n.getElemento().getMes() == 'k') {
                                         do {
-                                            e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Día actual: " + e.getDia() + "\nIngrese el día del evento: ")));
-                                        } while (e.getDia() < 31);
+                                            n.getElemento().setDia(Integer.parseInt(JOptionPane.showInputDialog("Día actual: " + n.getElemento().getDia() + "\nIngrese el día del evento: ")));
+                                        } while (n.getElemento().getDia() > 30);
                                     } else {
                                         do {
-                                            e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Dia actual: " + e.getDia() + "\nIngrese el día del evento: ")));
-                                        } while (e.getDia() < 32);
+                                            n.getElemento().setDia(Integer.parseInt(JOptionPane.showInputDialog("Dia actual: " + n.getElemento().getDia() + "\nIngrese el día del evento: ")));
+                                        } while (n.getElemento().getDia() > 31);
                                     }
                                     break;
                                 case 'b':
                                     do {
-                                        e.setMes(JOptionPane.showInputDialog("Mes actual: " + e.getMes() + "\n\nElija el nuevo mes del evento: "
+                                        n.getElemento().setMes(JOptionPane.showInputDialog("Mes actual: " + n.getElemento().getMes() + "\n\nElija el nuevo mes del evento: "
                                                 + "\na. Enero\nb. Febrero\nc. Marzo\nd. Abril\ne. Mayo\nf. Junio\ng. Julio"
                                                 + "\nh. Agosto\ni. Setiembre\nj. Octubre\nk. Noviembre\nl. Diciembre").toLowerCase().charAt(0));
-                                    } while (e.getMes() != ' ');
+                                    } while (n.getElemento().getMes() != ' ');
 
-                                    switch (e.getMes()) {
+                                    switch (n.getElemento().getMes()) {
                                         case 'a':
                                             e.setM("Enero");
                                             break;
@@ -212,16 +227,17 @@ public class listaEvento {
                                     }
                                     break;
                                 case 'c':
-                                    e.setAno(JOptionPane.showInputDialog("Año actual del evento: " + e.getAno() + "\nEscoja el nuevo año del evento: \na. 2022 \nb.2023\nc.2024").toLowerCase().charAt(0));
+                                    e.setAno(JOptionPane.showInputDialog("Año actual del evento: " + n.getElemento().getAno() + "\nEscoja el nuevo año del evento: \na. 2022 \nb.2023\nc.2024").toLowerCase().charAt(0));
                                     break;
                             }
-                            e.setFecha("---FECHA DEL EVENTO---" + "\n\nDía: " + String.valueOf(e.getDia()) + "\nMes: " + e.getM() + "\nAño: " + String.valueOf(e.getAno()));
+                            e.setFecha("---FECHA DEL EVENTO---" + "\n\nDía: " + String.valueOf(n.getElemento().getDia()) + "\nMes: " + e.getM() + "\nAño: " + String.valueOf(n.getElemento().getAno()));
                             break;
                         case 'c': //salir del programa
                             break;
                     }
+                    n.setElemento(e);
                 }
-                if (aux != null && !aux.equals(e.getNomEvento())) {
+                if (aux != null && !aux.equals(n.getElemento().getNomEvento())) {
                     aux.getSiguiente();
                 }
             } else {
@@ -287,38 +303,4 @@ public class listaEvento {
         }
     }
 
-    public int comprarEvento(int entradas) {
-
-        entradas = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas entradas comprará?\n\nIngreselo:"));
-
-        if (entradas == 0) {
-            return 0;
-        } else {
-            if (!esVacio()) {
-                String compra = "";
-                do {
-                    compra = JOptionPane.showInputDialog("Ingrese el nombre del evento que desea editar: \n");
-                    if (!existe(compra)) {
-                        JOptionPane.showMessageDialog(null, "El evento no existe...");
-                    }
-                } while (!existe(compra));
-                nodoEvento aux = inicio;
-                while (aux != null && aux.equals(compra)) {
-                    /*ACÁ SE LLAMAN LOS ASIENTOS PARA QUE EL USUARIO LOS ELIJA SEGÚN LA CANTIDAD DE ENTRADAS*/
-                }
-                if (aux != null && !aux.equals(e.getNomEvento())) {
-                    aux.getSiguiente();
-                }
-                return comprarEvento(entradas - 1);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No hay eventos...");
-                return 0;
-            }
-        }
-    }
-    
-    public void eliminarCompra(){
-        
-    }
 }
