@@ -84,7 +84,8 @@ public class listaEvento {
         }
     }
 
-    public char editarEvento(char editar) {
+    /*public char editarEvento(char editar) {
+    LUCIANA
 
         if (editar == 'n') {
             n.setElemento(e);
@@ -139,6 +140,68 @@ public class listaEvento {
                 JOptionPane.showMessageDialog(null, "LISTA VACÍA");
             }
             
+
+            return editarEvento(editar = JOptionPane.showInputDialog("¿Desea editar algo más? "
+                    + "\n-Si\n-No").toLowerCase().charAt(0));
+        }
+
+    }
+     */
+    public char editarEvento(char editar) {
+        //MONTERO
+
+        if (editar == 'n') {
+            n.setElemento(e);
+            return editar = 'n';
+        } else {
+            String evento = "";
+            char opc = ' ';
+
+            if (!esVacio()) {
+                evento = JOptionPane.showInputDialog("Ingrese el nombre del evento a editar: ");
+                nodoEvento aux = inicio;
+                while (aux != null) {
+                    if (aux.getElemento().getNomEvento().equals(evento)) {
+                        opc = JOptionPane.showInputDialog("¿Qué desea editar?"
+                                + "\na. Nombre del evento \nb.Mes\nc. Día\nd. Año\ns. Salir al menú principal").toLowerCase().charAt(0);
+                        switch (opc) {
+                            case 'a':
+                                aux.getElemento().setNomEvento(JOptionPane.showInputDialog("Ingrese el nuevo nombre:"));
+                                JOptionPane.showMessageDialog(null, "Nuevo nombre del evento: " + aux.getElemento().getNomEvento());
+                                break;
+                            case 'b':
+                                aux.getElemento().setMes(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo mes: ")));
+
+                                JOptionPane.showMessageDialog(null, "Nuevo mes: " + aux.getElemento().getMes());
+                                break;
+                            case 'c':
+                                aux.getElemento().setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo día del evento: ")));
+
+                                JOptionPane.showMessageDialog(null, "Nuevo día: " + aux.getElemento().getDia());
+                                break;
+                            case 'd':
+                                aux.getElemento().setAno(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo año: ")));
+
+                                JOptionPane.showMessageDialog(null, "Nuevo año: " + aux.getElemento().getAno());
+                                break;
+                            case 's':
+
+                                return editarEvento(editar = JOptionPane.showInputDialog("SALIENDO...\n¿Desea editar algo más? "
+                                        + "\n-Si\n-No").toLowerCase().charAt(0));
+                            default:
+                                JOptionPane.showMessageDialog(null, "Opcion no válida...");
+                                break;
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No existe el evento");
+
+                    }
+                    aux = aux.getSiguiente();
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "LISTA VACÍA");
+            }
 
             return editarEvento(editar = JOptionPane.showInputDialog("¿Desea editar algo más? "
                     + "\n-Si\n-No").toLowerCase().charAt(0));
