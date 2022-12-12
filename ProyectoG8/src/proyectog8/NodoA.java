@@ -43,6 +43,10 @@ public class NodoA {
     public void setEnladeDer(NodoA enladeDer) {
         this.enladeDer = enladeDer;
     }
+
+    void getEnlaceIzq(NodoA enlaceIzq) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }
