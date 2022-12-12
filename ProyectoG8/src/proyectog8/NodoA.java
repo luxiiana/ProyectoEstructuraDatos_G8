@@ -3,29 +3,24 @@ package proyectog8;
 
 
 public class NodoA {
-     private Dato usuario;
-     private Evento evento;
-     private Asientos asiento;
+    private datoArbol elemento;
     private NodoA enlaceIzq;
     private NodoA enladeDer;
     
     
     public NodoA(){
+        this.elemento=null;
         this.enlaceIzq=null;
         this.enladeDer=null;
         
     }
 
-    public Dato getUsuario() {
-        return usuario;
+    public datoArbol getElemento() {
+        return elemento;
     }
 
-    public Evento getEvento() {
-        return evento;
-    }
-
-    public Asientos getAsiento() {
-        return asiento;
+    public void setElemento(datoArbol elemento) {
+        this.elemento = elemento;
     }
 
     public NodoA getEnlaceIzq() {
@@ -43,10 +38,5 @@ public class NodoA {
     public void setEnladeDer(NodoA enladeDer) {
         this.enladeDer = enladeDer;
     }
-
-    void getEnlaceIzq(NodoA enlaceIzq) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
     
 }

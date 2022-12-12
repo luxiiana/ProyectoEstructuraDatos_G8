@@ -3,24 +3,14 @@ package proyectog8;
 import javax.swing.JOptionPane;
 
 public class arbolVentas {
-
+    
     private NodoA raiz;
     public nodoEvento inicio;
     
-
-    /*
-    Métodos que hay que hacer
-    
-    - Mostrar ventas: 
-    
-        "USER - EVENTO QUE COMPRA - ASIENTO - LO QUE PAGÓ"
-    
-    
-     */
     public arbolVentas() {
         this.raiz = null;
     }
-
+    
     public boolean EsVacio() {
         if (raiz == null) {
             return true;
@@ -28,32 +18,30 @@ public class arbolVentas {
             return false;
         }
     }
-    public boolean existe(Evento evento) {
-        nodoEvento aux = inicio ;
-        while (!aux.equals(evento)) {
-            aux = aux.getSiguiente();
-        }
-        if ((aux.equals(evento)) && (evento.equals(aux.getElemento()))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    
     public void agregarAlArbol() {
-        Dato d = new Dato();
-        Evento e = new Evento();
+
+        //---OBJETOS----
+        listaEvento l = new listaEvento();
+        ListaAsientos la = new ListaAsientos();
         Asientos a = new Asientos();
-        d.getNickname(); 
-        do{
-        e.setNomEvento(JOptionPane.showInputDialog("digite el nombre del evento al que desea asistir")); 
-        if(!existe(e)){
-            JOptionPane.showMessageDialog(null,"no existe el evento");
-        }
-        }while(!existe(e));
+        Dato d = new Dato();
+        datoArbol da = new datoArbol();
+
+        //---INGRESAR DATOS---
+        do {
+            da.setEvento(JOptionPane.showInputDialog("Ingrese el evento al que desea asistir: ")); //evento
+            if (!l.existe(da.getEvento())) {
+                JOptionPane.showMessageDialog(null, "No existe el evento");
+            }
+        } while (!l.existe(da.getEvento()));
         
-        a.setNumAsiento(Integer.parseInt(JOptionPane.showInputDialog("Digite el numero de asiento"))); 
+        la.comprarAsiento(); //comprar asiento
+        da.setAsiento(a.getNumAsiento()); //guardar número de asiento en nodo arbol
+        da.setUsuario(d.getNickname()); //guardar nickname en usuario
+        
         NodoA nuevo = new NodoA();
+        nuevo.setElemento(da); //nodo del árbol
         if (EsVacio()) {
             raiz = nuevo;
         } else {
@@ -61,7 +49,6 @@ public class arbolVentas {
         }
     }
     
-
     public void insertarNuevo(NodoA raiz, NodoA nuevo) {
         if (raiz.getEnlaceIzq() == null) {
             raiz.setEnlaceIzq(nuevo);
@@ -74,7 +61,7 @@ public class arbolVentas {
             insertarNuevo(raiz.getEnladeDer(), nuevo);
         }
     }
-
+    
     public void mostrarRaiz() {
         if (EsVacio()) {
             mostrarNodo(raiz);
@@ -82,70 +69,87 @@ public class arbolVentas {
             JOptionPane.showMessageDialog(null, "no se puede mostrar, no hay eventos");
         }
     }
-
+    
     public void mostrarNodo(NodoA raiz) {
         if (raiz != null) {
             mostrarNodo(raiz.getEnlaceIzq());
-            System.out.println(raiz.getUsuario().getNombre());
-            System.out.println(raiz.getEvento().getNomEvento());
-            System.out.println(raiz.getAsiento().getNumAsiento());
-
+            System.out.println(raiz.getElemento().getUsuario());
+            System.out.println(raiz.getElemento().getEvento());
+            System.out.println(raiz.getElemento().getAsiento());
+            
             mostrarNodo(raiz.getEnladeDer());
         }
-
+        
     }
     
-    
-    public void modificarArbol(){
-    Dato d = new Dato();
-    if(raiz.getEnladeDer()!=null){
-        d.setNickname(JOptionPane.showInputDialog("digite el nombre que desea modificar"));
-    
-    }else{
-        if(raiz.getEnlaceIzq()!=null){
-        d.setNickname(JOptionPane.showInputDialog("digite el nombre que desea modificar"));
-    }}
-    
+    public void modificarArbol() {
+        listaEvento l = new listaEvento();
+        String evento;
+        if (raiz.getEnladeDer() != null) {
+            do {
+                evento = JOptionPane.showInputDialog("Ingrese el nombre del evento que compro para editarlo:\n");
+            } while (!l.existe(evento));
+        } else {
+            if (raiz.getEnlaceIzq() != null) {
+                do {
+                    evento = JOptionPane.showInputDialog("Ingrese el nombre del evento que compro para editarlo:\n");
+                } while (!l.existe(evento));
+            }
+        }
+        
     }
     
-
-    public void eliminarNodo(NodoA nuevo, Evento evento) {
-        if (raiz != null) {
-            if (evento.equals(nuevo.getEvento())) {
-                if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() == null) {
-                    nuevo = null;
+    public void eliminar() {
+        listaEvento l = new listaEvento();
+        String evento = "";
+        
+        do {
+            evento = JOptionPane.showInputDialog("Ingrese el evento que desea eliminar:\n");
+        } while (!l.existe(evento));
+        
+        NodoA aux = raiz;
+        if (aux != null) {
+            eliminarNodo(aux, evento);
+            JOptionPane.showMessageDialog(null, "Evento eliminado");
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay eventos...");
+        }
+    }
+    
+    public void eliminarNodo(NodoA nuevo, String evento) {
+        
+        if (evento.equals(nuevo.getElemento().getEvento())) {
+            if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() == null) {
+                nuevo = null;
+            } else {
+                if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() != null) {
+                    nuevo = nuevo.getEnladeDer();
                 } else {
-                    if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() != null) {
-                        nuevo = nuevo.getEnladeDer();
+                    if (raiz.getEnlaceIzq() != null && raiz.getEnladeDer() == null) {
+                        nuevo = nuevo.getEnlaceIzq();
                     } else {
-                        if (raiz.getEnlaceIzq() != null && raiz.getEnladeDer() == null) {
-                            nuevo = nuevo.getEnlaceIzq();
-                        } else {
-                            if (raiz.getEnlaceIzq() != null && raiz.getEnladeDer() != null) {
-                                NodoA der = raiz.getEnladeDer();
-                                NodoA temp = sucesor(der);
-
-                                temp.getEnlaceIzq(raiz.getEnlaceIzq());
-                               
-                            }
+                        if (raiz.getEnlaceIzq() != null && raiz.getEnladeDer() != null) {
+                            NodoA der = raiz.getEnladeDer();
+                            NodoA temp = sucesor(der);
+                            
+                            temp.setEnlaceIzq(raiz.getEnlaceIzq());
+                            //temp.getEnlaceIzq(raiz.getEnlaceIzq());
 
                         }
+                        
                     }
-                }
-                {
-
                 }
             }
         }
-       
+        
     }
-
+    
     public NodoA sucesor(NodoA raiz) {
         if (raiz.getEnlaceIzq() != null) {
             return sucesor(raiz.getEnlaceIzq());
         }
         return raiz;
-
+        
     }
-
+    
 }

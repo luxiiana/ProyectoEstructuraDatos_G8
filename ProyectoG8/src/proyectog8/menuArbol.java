@@ -23,11 +23,11 @@ public class menuArbol {
                 menuArbol();
                 break;
             case 'c':
-                //EN ESTA LINEA VA EL EDITAR
+                
                 menuArbol();
                 break;
             case 'd':
-                //EN ESTA LÍNEA VA EL ELIMINAR
+                a.eliminar();
                 menuArbol();
                 break;
             case 's':

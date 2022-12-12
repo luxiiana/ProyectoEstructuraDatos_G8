@@ -6,21 +6,17 @@ public class Evento {
     
     private int dia = 0;
     
-    private char mes = ' ';
+    private int mes = 0;
     
-    private char ano = ' ';
+    private int ano = 0;
     
     private char lugar = ' ';
-    
-    private String m = " ";
-    
-    private String fecha = " ";
     
     public Evento(){
         this.nomEvento=null;
         this.dia=0;
-        this.mes=' ';
-        this.ano=' ';
+        this.mes=0;
+        this.ano=0;
         this.lugar=' ';
     }
 
@@ -40,19 +36,19 @@ public class Evento {
         this.dia = dia;
     }
 
-    public char getMes() {
+    public int getMes() {
         return mes;
     }
 
-    public void setMes(char mes) {
+    public void setMes(int mes) {
         this.mes = mes;
     }
 
-    public char getAno() {
+    public int getAno() {
         return ano;
     }
 
-    public void setAno(char ano) {
+    public void setAno(int ano) {
         this.ano = ano;
     }
     
@@ -62,22 +58,6 @@ public class Evento {
 
     public void setLugar(char lugar) {
         this.lugar = lugar;
-    }
-
-    public String getM() {
-        return m;
-    }
-
-    public void setM(String m) {
-        this.m = m;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
     }
     
 }
