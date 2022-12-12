@@ -43,6 +43,7 @@ public class listaEvento {
         if (agregar == 'n') {
             return 'n';
         } else {
+            
             //---NOMBRE EVENTO---
             e.setNomEvento(JOptionPane.showInputDialog("Ingrese el nombre del nuevo evento: "));
 
@@ -59,11 +60,11 @@ public class listaEvento {
             do {
                 e.setAno(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el año del evento:\n(Sólo se puede agendar del 2022 al 2024)")));
             } while (e.getAno() < 2022 && e.getAno() > 2024);
-
+            
             //---NODO---
             nodoEvento n = new nodoEvento();
             n.setElemento(e);
-
+            
             if (esVacio()) {
                 inicio = n;
             } else if (e.getNomEvento().compareTo(inicio.getElemento().getNomEvento()) < 0) { //izquierda
@@ -83,73 +84,9 @@ public class listaEvento {
             return crearEvento(agregar = JOptionPane.showInputDialog("¿Desea crear otro evento?\n-Si\n-No").toLowerCase().charAt(0));
         }
     }
-
-    /*public char editarEvento(char editar) {
-    LUCIANA
-
-        if (editar == 'n') {
-            n.setElemento(e);
-            return editar = 'n';
-        } else {
-            String evento = "";
-            char opc = ' ';
-            
-            if(!esVacio()){
-                 do {
-                    evento = JOptionPane.showInputDialog("Ingrese el nombre del evento a editar: ");
-                } while (!existe(evento));
-
-                nodoEvento aux = inicio;
-                while (aux != null) {
-
-                    opc = JOptionPane.showInputDialog("¿Qué desea editar?"
-                            + "\na. Nombre del evento \nb.Mes\nc. Día\nd. Año\ns. Salir al menú principal").toLowerCase().charAt(0);
-
-                    switch (opc) {
-                        case 'a':
-                            e.setNomEvento(JOptionPane.showInputDialog("Ingrese el nuevo nombre:"));
-                            n.setElemento(e);
-                            JOptionPane.showMessageDialog(null, "Nuevo nombre del evento: " + n.getElemento().getNomEvento());
-                            break;
-                        case 'b':
-                            e.setMes(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo mes: ")));
-                            n.setElemento(e);
-                            JOptionPane.showMessageDialog(null, "Nuevo mes: " + n.getElemento().getMes());
-                            break;
-                        case 'c':
-                            e.setDia(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo día del evento: ")));
-                            n.setElemento(e);
-                            JOptionPane.showMessageDialog(null, "Nuevo día: " + n.getElemento().getDia());
-                            break;
-                        case 'd':
-                            e.setAno(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo año: ")));
-                            n.setElemento(e);
-                            JOptionPane.showMessageDialog(null, "Nuevo año: " + n.getElemento().getAno());
-                            break;
-                        case 's':
-                            n.setElemento(e);
-                            return editarEvento(editar = JOptionPane.showInputDialog("SALIENDO...\n¿Desea editar algo más? "
-                                    + "\n-Si\n-No").toLowerCase().charAt(0));
-                        default:
-                            JOptionPane.showMessageDialog(null, "Opcion no válida...");
-                            break;
-                    }
-
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "LISTA VACÍA");
-            }
-            
-
-            return editarEvento(editar = JOptionPane.showInputDialog("¿Desea editar algo más? "
-                    + "\n-Si\n-No").toLowerCase().charAt(0));
-        }
-
-    }
-     */
+    
     public char editarEvento(char editar) {
-        //MONTERO
-
+        
         if (editar == 'n') {
             n.setElemento(e);
             return editar = 'n';
