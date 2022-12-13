@@ -43,7 +43,7 @@ public class listaEvento {
         if (agregar == 'n') {
             return 'n';
         } else {
-            
+
             //---NOMBRE EVENTO---
             e.setNomEvento(JOptionPane.showInputDialog("Ingrese el nombre del nuevo evento: "));
 
@@ -60,11 +60,11 @@ public class listaEvento {
             do {
                 e.setAno(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el año del evento:\n(Sólo se puede agendar del 2022 al 2024)")));
             } while (e.getAno() < 2022 && e.getAno() > 2024);
-            
+
             //---NODO---
             nodoEvento n = new nodoEvento();
             n.setElemento(e);
-            
+
             if (esVacio()) {
                 inicio = n;
             } else if (e.getNomEvento().compareTo(inicio.getElemento().getNomEvento()) < 0) { //izquierda
@@ -84,9 +84,9 @@ public class listaEvento {
             return crearEvento(agregar = JOptionPane.showInputDialog("¿Desea crear otro evento?\n-Si\n-No").toLowerCase().charAt(0));
         }
     }
-    
+
     public char editarEvento(char editar) {
-        
+
         if (editar == 'n') {
             n.setElemento(e);
             return editar = 'n';

@@ -149,12 +149,26 @@ public class arbolVentas {
         aux.getElemento().setAsiento(nuevoAsiento);
         return aux;
     }
+    
+    public void eliminar(){
+        String dato;
+        if(!EsVacio()){
+            dato=JOptionPane.showInputDialog("Ingrese el nombre de la persona del nodo a eliminar: ");
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay datos...");
+        }
+    }
+    
+    public boolean eliminarNodo(String dato){
+        nodoA auxiliar = raiz;
+        nodoA padre = raiz;
+        boolean 
+    }
 
-    public void eliminar() {
-        listaEvento l = new listaEvento();
-        String evento = "";
+    /*public void eliminar() {
+        String nombre = "";
 
-        evento = JOptionPane.showInputDialog("Ingrese el evento que desea eliminar:\n");
+        nombre = JOptionPane.showInputDialog("Ingrese nombre de la persona del nodo que desea eliminar:\n");
         
         NodoA aux = raiz;
         if (aux != null) {
@@ -165,9 +179,9 @@ public class arbolVentas {
         }
     }
 
-    public void eliminarNodo(NodoA nuevo, String evento) {
+    public void eliminarNodo(NodoA nuevo, String nombre) {
 
-        if (evento.equals(nuevo.getElemento().getEvento())) {
+        if (nombre.equals(nuevo.getElemento().getUsuario())) {
             if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() == null) {
                 nuevo = null;
             } else {
@@ -182,6 +196,7 @@ public class arbolVentas {
                             NodoA temp = sucesor(der);
 
                             temp.setEnlaceIzq(raiz.getEnlaceIzq());
+                            raiz.setElemento(temp);
                             //temp.getEnlaceIzq(raiz.getEnlaceIzq());
 
                         }
@@ -199,6 +214,6 @@ public class arbolVentas {
         }
         return raiz;
 
-    }
+    }*/
 
 }

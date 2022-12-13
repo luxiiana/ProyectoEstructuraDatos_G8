@@ -14,7 +14,7 @@ public class MenuUsuarios {
                 +"Menu principal\n"
                 + "a. Registrar usuario\n"
                 + "b. Iniciar Sesion\n"
-                + "c. Inactivar usuario\n"
+                + "c. Eliminar usuario\n"
                 + "s. Salir\n\n"
                 + "Digite su opción:").toLowerCase().charAt(0);
         

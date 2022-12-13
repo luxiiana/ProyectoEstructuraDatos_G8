@@ -35,7 +35,7 @@ public class MenuAsientos {
                 break;
             }
             case 'd': {
-                
+                la.eliminarAsiento();
                 mostrarMenuAsientos();
                 break;
             }
