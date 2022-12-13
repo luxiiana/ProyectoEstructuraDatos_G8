@@ -160,9 +160,18 @@ public class arbolVentas {
     }
     
     public boolean eliminarNodo(String dato){
-        nodoA auxiliar = raiz;
-        nodoA padre = raiz;
-        boolean 
+        NodoA auxiliar = raiz;
+        NodoA padre = raiz;
+        boolean esHijoIzq = true;
+        while(dato!=auxiliar.getElemento()){
+            padre=auxiliar;
+            if(dato<auxiliar.dato){
+                esHijoIzq = true;
+                auxiliar = auxiliar.enlaceIzq;
+            }else{
+                
+            }
+        }
     }
 
     /*public void eliminar() {
