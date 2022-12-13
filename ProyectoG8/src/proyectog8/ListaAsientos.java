@@ -130,58 +130,95 @@ public class ListaAsientos {
     }
 
     public char comprarAsiento(char comprar) {
-
+        int repetido = 1;
         if (comprar == 'n') {
             return 'n';
         } else {
 
-            Asientos a = new Asientos();
+
+
+           Asientos a = new Asientos();
             mostrarAsientos();
             a.setCodArea(JOptionPane.showInputDialog("Digite el codigo de asiento que desea (PRE/NOR) y su numero de asiento (1-20)   (PRE: 5000 Colones NOR: 10000 colones) "));
 
-            for (int i = 0; i < 21; i++) {
-                if (a.getCodArea().equalsIgnoreCase("PRE" + i) || a.getCodArea().equalsIgnoreCase("PRE0" + i)) {
-                    a.setCosto(5000);
-                } else if (a.getCodArea().equalsIgnoreCase("NOR" + i) || a.getCodArea().equalsIgnoreCase("NOR0" + i)) {
-                    a.setCosto(10000);
-                }
-            }
 
-            a.setLibOcu('O');
-            ocuparAsiento(a.getCodArea());
-            JOptionPane.showMessageDialog(null, "¡Asiento seleccionado!");
 
-            nodoAsiento nuevo = new nodoAsiento();
-            nuevo.setDato(a);
-            if (esVacia()) {
-                inicio = nuevo;
-                fin = nuevo;
-                fin.setSiguiente(inicio);
-                inicio.setAnterior(fin);
-            } else if (a.getNumAsiento() < inicio.getDato().getNumAsiento()) {
-                nuevo.setSiguiente(inicio);
-                inicio = nuevo;
-                fin.setSiguiente(inicio);
-                inicio.setAnterior(fin);
-            } else if (a.getNumAsiento() >= fin.getDato().getNumAsiento()) {
-                fin.setSiguiente(nuevo);
-                fin = nuevo;
-                fin.setSiguiente(inicio);
-                inicio.setAnterior(fin);
-            } else {
+           if (!esVacia()) {
+                String s = "";
                 nodoAsiento aux = inicio;
-                while (aux.getSiguiente().getDato().getNumAsiento() < a.getNumAsiento()) {
+                if (aux.getDato().getCodArea().equals(a.getCodArea())) {
+                    repetido = 0;
+                    JOptionPane.showMessageDialog(null, "ERROR El asiento no se puede seleccionar porque ya fue comprado anteriormente");
+                } else {
+                    repetido = 1;
+                }
+                aux = aux.getSiguiente();
+                while (aux != inicio) {
+                    while (aux.getDato().getCodArea().equals(a.getCodArea())) {
+                        repetido = 0;
+                        JOptionPane.showMessageDialog(null, "ERROR El asiento no se puede seleccionar porque ya fue comprado anteriormente");
+                    }
+                    repetido = 1;
+                    
                     aux = aux.getSiguiente();
                 }
-                nuevo.setSiguiente(aux.getSiguiente());
-                nuevo.setAnterior(aux);
-                aux.setSiguiente(nuevo);
-                nuevo.getSiguiente().setAnterior(nuevo);
             }
-            return comprarAsiento(comprar = JOptionPane.showInputDialog("¿Desea comprar más asientos?\n-Si\n-No").toLowerCase().charAt(0));
-        }
+            if (repetido != 0) {
+                for (int i = 0; i < 21; i++) {
+                    if (a.getCodArea().equalsIgnoreCase("PRE" + i) || a.getCodArea().equalsIgnoreCase("PRE0" + i)) {
+                        a.setCosto(5000);
+                    } else if (a.getCodArea().equalsIgnoreCase("NOR" + i) || a.getCodArea().equalsIgnoreCase("NOR0" + i)) {
+                        a.setCosto(10000);
+                    }
+                }
 
-    }
+
+
+               a.setLibOcu('O');
+                ocuparAsiento(a.getCodArea());
+                JOptionPane.showMessageDialog(null, "¡Asiento seleccionado!");
+
+
+
+               nodoAsiento nuevo = new nodoAsiento();
+                nuevo.setDato(a);
+                if (esVacia()) {
+                    inicio = nuevo;
+                    fin = nuevo;
+                    fin.setSiguiente(inicio);
+                    inicio.setAnterior(fin);
+                } else if (a.getNumAsiento() < inicio.getDato().getNumAsiento()) {
+                    nuevo.setSiguiente(inicio);
+                    inicio = nuevo;
+                    fin.setSiguiente(inicio);
+                    inicio.setAnterior(fin);
+                } else if (a.getNumAsiento() >= fin.getDato().getNumAsiento()) {
+                    fin.setSiguiente(nuevo);
+                    fin = nuevo;
+                    fin.setSiguiente(inicio);
+                    inicio.setAnterior(fin);
+                } else {
+                    nodoAsiento aux = inicio;
+                    while (aux.getSiguiente().getDato().getNumAsiento() < a.getNumAsiento()) {
+                        aux = aux.getSiguiente();
+                    }
+                    nuevo.setSiguiente(aux.getSiguiente());
+                    nuevo.setAnterior(aux);
+                    aux.setSiguiente(nuevo);
+                    nuevo.getSiguiente().setAnterior(nuevo);
+                }
+
+
+
+           } else {
+                comprarAsiento('s');
+            }
+        }
+        return comprarAsiento(comprar = JOptionPane.showInputDialog("¿Desea comprar más asientos?\n-Si\n-No").toLowerCase().charAt(0));
+
+
+
+   }
 
     public char editarAsiento(char editar) {
 
@@ -245,89 +282,54 @@ public class ListaAsientos {
 
         }
     }
+    
+    public void eliminarAsiento() {
+        try { //para atrapar posibles errores a la hora de eliminar datos
+            if (!esVacia()) {
+                String codigo = JOptionPane.showInputDialog("Digite el codigo de asiento que desea cambiar (PRE/NOR) y su numero de asiento (1-20) ");
+                if (codigo.equals(inicio.getDato().getCodArea())) { //si es igual a inicio, inicio pasa al siguiente borrando al actual inicio
+                    inicio = inicio.getSiguiente();
 
-    public void eliminarAsiento(){
-         try{ //para atrapar posibles errores a la hora de eliminar datos
-            if(!esVacia()){
-                String codigo = JOptionPane.showInputDialog("Ingrese el código de su asiento: ");
-                if(codigo.equals(inicio.getDato().getCodArea())){ //si es igual a inicio, inicio pasa al siguiente borrando al actual inicio
-                    inicio=inicio.getSiguiente();
-                    
-                    //referencia circular
+
+
+                   //referencia circular
                     fin.setSiguiente(inicio);
                     inicio.setAnterior(fin);
-                }else{ 
-                     //creo 2 variables
+                    desocuparAsiento(inicio.getDato().getCodArea());
+                } else {
+                    //creo 2 variables
                     nodoAsiento auxiliar;
                     nodoAsiento anterior;
-                    
-                    //anterior sera auxiliar
+
+
+
+                   //anterior sera auxiliar
                     anterior = inicio;
                     //auxiliar sera el que sigue de inicio
                     auxiliar = inicio.getSiguiente();
                     /*recorre mientras auxiliar es != de inicio y mientras el número del carro
                     de auxiliar sea diferente del que busco*/
-                    while((auxiliar != inicio)&&(!auxiliar.getDato().getCodArea().equals(codigo))){
-                        /*Entonces anterior será el siguiente 
+                    while ((auxiliar != inicio) && (!auxiliar.getDato().getCodArea().equals(codigo))) {
+                        /*Entonces anterior será el siguiente
                         y auxiliar el siguiente*/
-                        anterior=anterior.getSiguiente();
-                        auxiliar=auxiliar.getSiguiente();
+                        anterior = anterior.getSiguiente();
+                        auxiliar = auxiliar.getSiguiente();
                     }
                     //si auxiliar es diferente a inicio
-                    if(auxiliar!=inicio){
+                    if (auxiliar != inicio) {
                         //el siguiente de auxiliar
                         anterior.setSiguiente(auxiliar);
                         //actualiza el enlace
                         fin.setSiguiente(auxiliar.getSiguiente());
+                         desocuparAsiento(auxiliar.getDato().getCodArea());
                     }
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "No hay datos...");
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "¡Error al extraer!", "Ocurrió un error al extraer", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    /*public void eliminarAsiento() {
-        if (!esVacia()) {
-            inicio = inicio.getSiguiente();
-            fin.setSiguiente(inicio);
-            inicio.setAnterior(fin);
-            JOptionPane.showMessageDialog(null, "El elemento fue extraído!");
-        } else {
-            //a partir de aqui se pone que el asiento no pudo ser eliminado porque estaba ocupado o algo asi
-        }
-    }
-
-    
-        try {
-            if (!esVacia()) {
-            String asiento = JOptionPane.showInputDialog(null, "Digite el nombre del asiento a eliminar");
-            if (asiento.equals(inicio.getDato().getCodArea())) {
-                inicio = inicio.getSiguiente();
-                fin.setSiguiente(inicio);
-                inicio.setAnterior(fin);
-                JOptionPane.showMessageDialog(null, "El elemento fue extraido");
-            } else {
-                nodoAsiento auxiliar;
-                nodoAsiento anterior;
-                anterior = inicio;
-                auxiliar = inicio.getSiguiente();
-                while ((auxiliar != inicio) && (auxiliar.getDato().getCodArea().equals(asiento))) {
-                    anterior = anterior.getSiguiente();
-                    auxiliar = auxiliar.getSiguiente();
-                }
-                if (auxiliar != inicio) {
-                    anterior.setSiguiente(auxiliar.getSiguiente());
-                    fin.setSiguiente(inicio);
-                }
-            }
-        }
-
-    }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer");
-    }*/
-
 }
 

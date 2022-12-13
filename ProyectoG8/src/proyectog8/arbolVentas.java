@@ -151,78 +151,11 @@ public class arbolVentas {
     }
     
     public void eliminar(){
-        String dato;
-        if(!EsVacio()){
-            dato=JOptionPane.showInputDialog("Ingrese el nombre de la persona del nodo a eliminar: ");
-        }else{
-            JOptionPane.showMessageDialog(null, "No hay datos...");
-        }
-    }
-    
-    public boolean eliminarNodo(String dato){
-        NodoA auxiliar = raiz;
-        NodoA padre = raiz;
-        boolean esHijoIzq = true;
-        while(dato!=auxiliar.getElemento()){
-            padre=auxiliar;
-            if(dato<auxiliar.dato){
-                esHijoIzq = true;
-                auxiliar = auxiliar.enlaceIzq;
-            }else{
-                
-            }
-        }
-    }
-
-    /*public void eliminar() {
-        String nombre = "";
-
-        nombre = JOptionPane.showInputDialog("Ingrese nombre de la persona del nodo que desea eliminar:\n");
-        
-        NodoA aux = raiz;
-        if (aux != null) {
-            eliminarNodo(aux, evento);
-            JOptionPane.showMessageDialog(null, "Evento eliminado");
+        if (!EsVacio()) {
+            raiz = null;
         } else {
-            JOptionPane.showMessageDialog(null, "No hay eventos...");
+            JOptionPane.showMessageDialog(null, "No datos para eliminar...");
         }
     }
-
-    public void eliminarNodo(NodoA nuevo, String nombre) {
-
-        if (nombre.equals(nuevo.getElemento().getUsuario())) {
-            if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() == null) {
-                nuevo = null;
-            } else {
-                if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() != null) {
-                    nuevo = nuevo.getEnladeDer();
-                } else {
-                    if (raiz.getEnlaceIzq() != null && raiz.getEnladeDer() == null) {
-                        nuevo = nuevo.getEnlaceIzq();
-                    } else {
-                        if (raiz.getEnlaceIzq() != null && raiz.getEnladeDer() != null) {
-                            NodoA der = raiz.getEnladeDer();
-                            NodoA temp = sucesor(der);
-
-                            temp.setEnlaceIzq(raiz.getEnlaceIzq());
-                            raiz.setElemento(temp);
-                            //temp.getEnlaceIzq(raiz.getEnlaceIzq());
-
-                        }
-
-                    }
-                }
-            }
-        }
-
-    }
-
-    public NodoA sucesor(NodoA raiz) {
-        if (raiz.getEnlaceIzq() != null) {
-            return sucesor(raiz.getEnlaceIzq());
-        }
-        return raiz;
-
-    }*/
 
 }
