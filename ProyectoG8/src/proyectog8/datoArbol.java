@@ -3,28 +3,28 @@ package proyectog8;
 public class datoArbol {
     
     private String evento ="";
-    private int asiento=0;
+    private String asiento="";
     private String usuario="";
     
     public datoArbol(){
         this.evento=null;
-        this.asiento=0;
+        this.asiento=null;
         this.usuario=null;
-    }
-
-    public String getEvento() {
-        return evento;
     }
 
     public void setEvento(String evento) {
         this.evento = evento;
     }
 
-    public int getAsiento() {
+    public String getEvento() {
+        return evento;
+    }
+    
+    public String getAsiento() {
         return asiento;
     }
 
-    public void setAsiento(int asiento) {
+    public void setAsiento(String asiento) {
         this.asiento = asiento;
     }
     

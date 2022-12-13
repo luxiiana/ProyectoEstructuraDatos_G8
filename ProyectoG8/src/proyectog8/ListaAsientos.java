@@ -129,56 +129,67 @@ public class ListaAsientos {
 
     }
 
-    public void comprarAsiento() {
-        Asientos a = new Asientos();
-        mostrarAsientos();
-        a.setCodArea(JOptionPane.showInputDialog("Digite el codigo de asiento que desea (PRE/NOR) y su numero de asiento (1-20)   (PRE: 5000 Colones NOR: 10000 colones) "));
+    public char comprarAsiento(char comprar) {
 
-        for (int i = 0; i < 21; i++) {
-            if (a.getCodArea().equalsIgnoreCase("PRE" + i) || a.getCodArea().equalsIgnoreCase("PRE0" + i)) {
-                a.setCosto(5000);
-            } else if (a.getCodArea().equalsIgnoreCase("NOR" + i) || a.getCodArea().equalsIgnoreCase("NOR0" + i)) {
-                a.setCosto(10000);
-            }
-        }
-
-        a.setLibOcu('O');
-        ocuparAsiento(a.getCodArea());
-        JOptionPane.showMessageDialog(null, "¡Asiento seleccionado!");
-
-        nodoAsiento nuevo = new nodoAsiento();
-        nuevo.setDato(a);
-        if (esVacia()) {
-            inicio = nuevo;
-            fin = nuevo;
-            fin.setSiguiente(inicio);
-            inicio.setAnterior(fin);
-        } else if (a.getNumAsiento() < inicio.getDato().getNumAsiento()) {
-            nuevo.setSiguiente(inicio);
-            inicio = nuevo;
-            fin.setSiguiente(inicio);
-            inicio.setAnterior(fin);
-        } else if (a.getNumAsiento() >= fin.getDato().getNumAsiento()) {
-            fin.setSiguiente(nuevo);
-            fin = nuevo;
-            fin.setSiguiente(inicio);
-            inicio.setAnterior(fin);
+        if (comprar == 'n') {
+            return 'n';
         } else {
-            nodoAsiento aux = inicio;
-            while (aux.getSiguiente().getDato().getNumAsiento() < a.getNumAsiento()) {
-                aux = aux.getSiguiente();
+
+            Asientos a = new Asientos();
+            mostrarAsientos();
+            a.setCodArea(JOptionPane.showInputDialog("Digite el codigo de asiento que desea (PRE/NOR) y su numero de asiento (1-20)   (PRE: 5000 Colones NOR: 10000 colones) "));
+
+            for (int i = 0; i < 21; i++) {
+                if (a.getCodArea().equalsIgnoreCase("PRE" + i) || a.getCodArea().equalsIgnoreCase("PRE0" + i)) {
+                    a.setCosto(5000);
+                } else if (a.getCodArea().equalsIgnoreCase("NOR" + i) || a.getCodArea().equalsIgnoreCase("NOR0" + i)) {
+                    a.setCosto(10000);
+                }
             }
-            nuevo.setSiguiente(aux.getSiguiente());
-            nuevo.setAnterior(aux);
-            aux.setSiguiente(nuevo);
-            nuevo.getSiguiente().setAnterior(nuevo);
+
+            a.setLibOcu('O');
+            ocuparAsiento(a.getCodArea());
+            JOptionPane.showMessageDialog(null, "¡Asiento seleccionado!");
+
+            nodoAsiento nuevo = new nodoAsiento();
+            nuevo.setDato(a);
+            if (esVacia()) {
+                inicio = nuevo;
+                fin = nuevo;
+                fin.setSiguiente(inicio);
+                inicio.setAnterior(fin);
+            } else if (a.getNumAsiento() < inicio.getDato().getNumAsiento()) {
+                nuevo.setSiguiente(inicio);
+                inicio = nuevo;
+                fin.setSiguiente(inicio);
+                inicio.setAnterior(fin);
+            } else if (a.getNumAsiento() >= fin.getDato().getNumAsiento()) {
+                fin.setSiguiente(nuevo);
+                fin = nuevo;
+                fin.setSiguiente(inicio);
+                inicio.setAnterior(fin);
+            } else {
+                nodoAsiento aux = inicio;
+                while (aux.getSiguiente().getDato().getNumAsiento() < a.getNumAsiento()) {
+                    aux = aux.getSiguiente();
+                }
+                nuevo.setSiguiente(aux.getSiguiente());
+                nuevo.setAnterior(aux);
+                aux.setSiguiente(nuevo);
+                nuevo.getSiguiente().setAnterior(nuevo);
+            }
+            return comprarAsiento(comprar = JOptionPane.showInputDialog("¿Desea comprar más asientos?\n-Si\n-No").toLowerCase().charAt(0));
         }
 
     }
 
-    public void editarAsiento() {
-
-        int encontrado = 0;
+    public char editarAsiento(char editar) {
+        
+        if(editar == 'n'){
+            return 'n';
+        }else{
+            
+            int encontrado = 0;
         nodoAsiento aux = inicio;
         String asiento = JOptionPane.showInputDialog("Digite el codigo de asiento que desea cambiar (PRE/NOR) y su numero de asiento (1-20) ");
         if (aux.getDato().getCodArea().equalsIgnoreCase(asiento)) {
@@ -230,10 +241,12 @@ public class ListaAsientos {
         if (encontrado != 1) {
             JOptionPane.showMessageDialog(null, "El asiento seleccionado no fue encontrado, intente nuevamente ");
         }
-
+        return editarAsiento(editar=JOptionPane.showInputDialog("¿Desea editar otro asiento? \n-Si\n-No").toLowerCase().charAt(0));
+            
+        }
     }
 
-    public void eliminarAsiento() {
+    /*public void eliminarAsiento() {
         /*if (!esVacia()) {
             inicio = inicio.getSiguiente();
             fin.setSiguiente(inicio);
@@ -243,7 +256,7 @@ public class ListaAsientos {
             //a partir de aqui se pone que el asiento no pudo ser eliminado porque estaba ocupado o algo asi
         }
     }*/
-        try {
+ /*try {
             if (!esVacia()) {
                 String asiento = JOptionPane.showInputDialog(null, "Digite el nombre del asiento a eliminar");
                 if (asiento.equals(inicio.getDato().getCodArea())) {
@@ -271,5 +284,5 @@ public class ListaAsientos {
             JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer");
         }
 
-    }
+    }*/
 }

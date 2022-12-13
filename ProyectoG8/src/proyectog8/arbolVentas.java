@@ -3,14 +3,15 @@ package proyectog8;
 import javax.swing.JOptionPane;
 
 public class arbolVentas {
-    
+
     private NodoA raiz;
     public nodoEvento inicio;
-    
+
+
     public arbolVentas() {
         this.raiz = null;
     }
-    
+
     public boolean EsVacio() {
         if (raiz == null) {
             return true;
@@ -18,37 +19,28 @@ public class arbolVentas {
             return false;
         }
     }
-    
-    public void agregarAlArbol() {
 
+    public void agregarAlArbol() {
         //---OBJETOS----
-        listaEvento l = new listaEvento();
         ListaAsientos la = new ListaAsientos();
         Asientos a = new Asientos();
-        Dato d = new Dato();
         datoArbol da = new datoArbol();
 
         //---INGRESAR DATOS---
-        do {
-            da.setEvento(JOptionPane.showInputDialog("Ingrese el evento al que desea asistir: ")); //evento
-            if (!l.existe(da.getEvento())) {
-                JOptionPane.showMessageDialog(null, "No existe el evento");
-            }
-        } while (!l.existe(da.getEvento()));
-        
-        la.comprarAsiento(); //comprar asiento
-        da.setAsiento(a.getNumAsiento()); //guardar número de asiento en nodo arbol
-        da.setUsuario(d.getNickname()); //guardar nickname en usuario
+        da.setUsuario(JOptionPane.showInputDialog("Ingrese su nombre: ")); //usuario
+        da.setEvento(JOptionPane.showInputDialog("Ingrese el evento al que desea asistir: ")); //evento
+        da.setAsiento(JOptionPane.showInputDialog("Ingrese uno de sus asientos para confirmar asistencia: ")); //asiento
         
         NodoA nuevo = new NodoA();
         nuevo.setElemento(da); //nodo del árbol
+        
         if (EsVacio()) {
             raiz = nuevo;
         } else {
             insertarNuevo(raiz, nuevo);
         }
     }
-    
+
     public void insertarNuevo(NodoA raiz, NodoA nuevo) {
         if (raiz.getEnlaceIzq() == null) {
             raiz.setEnlaceIzq(nuevo);
@@ -61,51 +53,108 @@ public class arbolVentas {
             insertarNuevo(raiz.getEnladeDer(), nuevo);
         }
     }
-    
+
     public void mostrarRaiz() {
-        if (EsVacio()) {
+        if (!EsVacio()) {
             mostrarNodo(raiz);
         } else {
-            JOptionPane.showMessageDialog(null, "no se puede mostrar, no hay eventos");
+            JOptionPane.showMessageDialog(null, "No se puede mostrar, no hay ventas...");
         }
     }
-    
+
     public void mostrarNodo(NodoA raiz) {
         if (raiz != null) {
             mostrarNodo(raiz.getEnlaceIzq());
-            System.out.println(raiz.getElemento().getUsuario());
-            System.out.println(raiz.getElemento().getEvento());
-            System.out.println(raiz.getElemento().getAsiento());
-            
+            System.out.print("Nombre: "+raiz.getElemento().getUsuario()+"---- Evento: "+raiz.getElemento().getEvento()+"---- Asiento: "+raiz.getElemento().getAsiento()+"===>");
             mostrarNodo(raiz.getEnladeDer());
         }
-        
+
     }
-    
+
     public void modificarArbol() {
-        listaEvento l = new listaEvento();
-        String evento;
-        if (raiz.getEnladeDer() != null) {
-            do {
-                evento = JOptionPane.showInputDialog("Ingrese el nombre del evento que compro para editarlo:\n");
-            } while (!l.existe(evento));
-        } else {
-            if (raiz.getEnlaceIzq() != null) {
-                do {
-                    evento = JOptionPane.showInputDialog("Ingrese el nombre del evento que compro para editarlo:\n");
-                } while (!l.existe(evento));
-            }
+        
+        char opc =JOptionPane.showInputDialog("¿Qué va a editar?\na. Nombre\nb. Evento\nc. Asiento\ns. SALIR DE EDICIÓN").toLowerCase().charAt(0);
+        String dato;
+        
+        switch(opc){
+            case 'a':
+                dato=JOptionPane.showInputDialog("Ingrese el nombre: ");
+                cambiarNombre(dato);
+                break;
+            case 'b':
+                dato=JOptionPane.showInputDialog("Ingrese el evento: ");
+                cambiarEvento(dato);
+                break;
+            case 'c':
+                dato=JOptionPane.showInputDialog("Ingrese el asiento: ");
+                cambiarAsiento(dato);
+                break;
+            case 's':
+                JOptionPane.showMessageDialog(null, "Saliendo...");
+                break;
         }
         
     }
     
+    public NodoA cambiarNombre(String dato){
+        NodoA aux=raiz;
+        while(!aux.getElemento().getUsuario().equals(dato)){
+            if(aux.getElemento().getUsuario().compareTo(dato)>0){
+                aux=aux.getEnlaceIzq();
+            }else{
+                aux=aux.getEnladeDer();
+            }
+            if(aux==null){
+                JOptionPane.showMessageDialog(null, "Dato no encontrado");
+                return null;
+            }
+        }
+        String nuevoNombre=JOptionPane.showInputDialog("Ingrese el nuevo nombre: ");
+        aux.getElemento().setUsuario(nuevoNombre);
+        return aux;
+    }
+    
+    public NodoA cambiarEvento(String dato){
+        NodoA aux=raiz;
+        while(!aux.getElemento().getEvento().equals(dato)){
+            if(aux.getElemento().getEvento().compareTo(dato)>0){
+                aux=aux.getEnlaceIzq();
+            }else{
+                aux=aux.getEnladeDer();
+            }
+            if(aux==null){
+                JOptionPane.showMessageDialog(null, "Dato no encontrado");
+                return null;
+            }
+        }
+        String nuevoEvento=JOptionPane.showInputDialog("Ingrese el nuevo evento: ");
+        aux.getElemento().setEvento(nuevoEvento);
+        return aux;
+    }
+    
+    public NodoA cambiarAsiento(String dato){
+        NodoA aux=raiz;
+        while(!aux.getElemento().getAsiento().equals(dato)){
+            if(aux.getElemento().getAsiento().compareTo(dato)>0){
+                aux=aux.getEnlaceIzq();
+            }else{
+                aux=aux.getEnladeDer();
+            }
+            if(aux==null){
+                JOptionPane.showMessageDialog(null, "Dato no encontrado");
+                return null;
+            }
+        }
+        String nuevoAsiento=JOptionPane.showInputDialog("Ingrese su nuevo asiento: ");
+        aux.getElemento().setAsiento(nuevoAsiento);
+        return aux;
+    }
+
     public void eliminar() {
         listaEvento l = new listaEvento();
         String evento = "";
-        
-        do {
-            evento = JOptionPane.showInputDialog("Ingrese el evento que desea eliminar:\n");
-        } while (!l.existe(evento));
+
+        evento = JOptionPane.showInputDialog("Ingrese el evento que desea eliminar:\n");
         
         NodoA aux = raiz;
         if (aux != null) {
@@ -115,9 +164,9 @@ public class arbolVentas {
             JOptionPane.showMessageDialog(null, "No hay eventos...");
         }
     }
-    
+
     public void eliminarNodo(NodoA nuevo, String evento) {
-        
+
         if (evento.equals(nuevo.getElemento().getEvento())) {
             if (raiz.getEnlaceIzq() == null && raiz.getEnladeDer() == null) {
                 nuevo = null;
@@ -131,25 +180,25 @@ public class arbolVentas {
                         if (raiz.getEnlaceIzq() != null && raiz.getEnladeDer() != null) {
                             NodoA der = raiz.getEnladeDer();
                             NodoA temp = sucesor(der);
-                            
+
                             temp.setEnlaceIzq(raiz.getEnlaceIzq());
                             //temp.getEnlaceIzq(raiz.getEnlaceIzq());
 
                         }
-                        
+
                     }
                 }
             }
         }
-        
+
     }
-    
+
     public NodoA sucesor(NodoA raiz) {
         if (raiz.getEnlaceIzq() != null) {
             return sucesor(raiz.getEnlaceIzq());
         }
         return raiz;
-        
+
     }
-    
+
 }

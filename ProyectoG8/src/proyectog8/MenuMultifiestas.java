@@ -23,8 +23,8 @@ public class MenuMultifiestas {
                 " ----𝐌𝐔𝐋𝐓𝐈𝐅𝐈𝐄𝐒𝐓𝐀𝐒----\n\n"
                 +"Menu principal\n"
                 + "a. Eventos\n" //Crear evento - editar evento - eliminar evento
-                + "b. Menu de compra\n" //Comprar entrada - editar compra - eliminar compra
-                + "c. Mostrar ventas\n" //muestra arbol o ventas
+                + "b. Menu de compra\n"
+                + "c. Comprar asientos\n" //Comprar entrada - editar compra - eliminar compra
                 + "s. Salir\n\n"
                 + "Digite su opción:").toLowerCase().charAt(0);
         
@@ -38,9 +38,8 @@ public class MenuMultifiestas {
                 mv.menuArbol();
                 mostrarMenuMultifiestas();
                 break;
-
             case 'c':
-                a.mostrarRaiz();
+                ma.mostrarMenuAsientos();
                 mostrarMenuMultifiestas();
                 break;
             case 's':
